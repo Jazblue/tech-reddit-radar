@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reddit Tech Radar - Daily technology intelligence from Reddit discussions across AI, cybersecurity, AWS/cloud, and developer tools." />
+  <link rel="canonical" href="https://jazblue.github.io/tech-reddit-radar/" />
+  <meta property="og:title" content="Reddit Tech Radar" />
+  <meta property="og:description" content="Daily technology intelligence from Reddit discussions across AI, cybersecurity, AWS/cloud, and developer tools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jazblue.github.io/tech-reddit-radar/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Reddit Tech Radar</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-secondary: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79b8ff;
+      --success: #3fb950;
+      --warning: #d29922;
+      --danger: #f85149;
+      --card-bg: #161b22;
+      --code-bg: #0d1117;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 { margin: 0; font-size: 2rem; color: var(--text); }
+    header p { margin: 0.5rem 0 0; color: var(--text-muted); font-size: 1.1rem; }
+    .meta-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .meta-bar span { display: flex; align-items: center; gap: 0.4rem; }
+    main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    section { margin-bottom: 3rem; }
+    h2 {
+      font-size: 1.5rem;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    h3 { font-size: 1.2rem; margin-top: 1.5rem; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-title { margin: 0; font-size: 1.1rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-verified { background: rgba(63, 185, 80, 0.2); color: var(--success); border: 1px solid var(--success); }
+    .badge-partial { background: rgba(210, 153, 34, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+    .badge-community { background: rgba(88, 166, 255, 0.2); color: var(--accent); border: 1px solid var(--accent); }
+    .badge-unverified { background: rgba(248, 81, 73, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+    .badge-confidence-high { background: rgba(63, 185, 80, 0.15); color: var(--success); }
+    .badge-confidence-medium { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
+    .badge-confidence-low { background: rgba(248, 81, 73, 0.15); color: var(--danger); }
+    .category-tag {
+      background: var(--code-bg);
+      color: var(--accent);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+    .links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .links a:hover { background: rgba(88, 166, 255, 0.1); }
+    .summary { color: var(--text-muted); margin-bottom: 1rem; }
+    .watch-item { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .watch-item:last-child { border-bottom: none; }
+    .watch-title { font-weight: 600; margin-bottom: 0.25rem; }
+    .watch-meta { font-size: 0.85rem; color: var(--text-muted); }
+    .tool-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .tool-item:last-child { border-bottom: none; }
+    .tool-name { font-weight: 600; font-family: monospace; }
+    .tool-use { font-size: 0.8rem; color: var(--text-muted); }
+    .career-signal { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+    .career-signal:last-child { border-bottom: none; }
+    .verification-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .verification-item:last-child { border-bottom: none; }
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .quality-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .quality-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .quality-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+    .error { text-align: center; padding: 3rem; color: var(--danger); }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-hover); }
+    code {
+      background: var(--code-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reddit Tech Radar</h1>
+    <p>Daily technology intelligence from Reddit discussions</p>
+    <div class="meta-bar" id="meta-bar">
+      <span id="research-date">Research date: —</span>
+      <span id="last-updated">Last updated: —</span>
+      <span id="version">Version: —</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="summary-section" class="hidden">
+      <h2>Summary</h2>
+      <p id="summary" class="summary"></p>
+    </section>
+
+    <section id="biggest-section" class="hidden">
+      <h2>Biggest Discussions</h2>
+      <div id="biggest-discussions"></div>
+    </section>
+
+    <section id="ai-section" class="hidden">
+      <h2>AI Watch</h2>
+      <div id="ai-watch"></div>
+    </section>
+
+    <section id="cyber-section" class="hidden">
+      <h2>Cybersecurity Watch</h2>
+      <div id="cyber-watch"></div>
+    </section>
+
+    <section id="aws-section" class="hidden">
+      <h2>AWS / Cloud Watch</h2>
+      <div id="aws-watch"></div>
+    </section>
+
+    <section id="tools-section" class="hidden">
+      <h2>Tools People Are Talking About</h2>
+      <div id="tools-watch"></div>
+    </section>
+
+    <section id="career-section" class="hidden">
+      <h2>Cloud / IT Career Signals</h2>
+      <div id="career-signals"></div>
+    </section>
+
+    <section id="watch-section" class="hidden">
+      <h2>Worth Watching</h2>
+      <div id="worth-watching"></div>
+    </section>
+
+    <section id="learning-section" class="hidden">
+      <h2>AWS Learning Opportunity</h2>
+      <div id="learning-opportunity"></div>
+    </section>
+
+    <section id="verification-section" class="hidden">
+      <h2>Important Verification</h2>
+      <div id="verification-info"></div>
+    </section>
+
+    <section id="quality-section" class="hidden">
+      <h2>Research Quality</h2>
+      <div class="quality-grid" id="quality-metrics"></div>
+      <p id="limitations" class="summary" style="margin-top: 1rem;"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data source: <a href="https://github.com/Jazblue/tech-reddit-radar">GitHub Repository</a> | Updated daily via Hermes Agent</p>
+    <p><a href="data/reddit-tech-radar/latest.json">Raw JSON</a> | <a href="data/reddit-tech-radar/archive/">Archive</a></p>
+  </footer>
+
+  <script>
+    async function loadData() {
+      try {
+        const res = await fetch('data/reddit-tech-radar/latest.json');
+        if (!res.ok) throw new Error('Failed to load');
+        const data = await res.json();
+        render(data);
+      } catch (e) {
+        document.body.innerHTML = '<div class="error">Failed to load research data. <a href="data/reddit-tech-radar/latest.json">Try direct link</a></div>';
+      }
+    }
+
+    function render(d) {
+      document.getElementById('research-date').textContent = `Research date: ${d.researchDate || d.publicationDate}`;
+      document.getElementById('last-updated').textContent = `Last updated: ${d.lastUpdated ? new Date(d.lastUpdated).toLocaleString() : '—'}`;
+      document.getElementById('version').textContent = `Version: ${d.researchVersion || '—'}`;
+
+      if (d.summary) {
+        document.getElementById('summary').textContent = d.summary;
+        document.getElementById('summary-section').classList.remove('hidden');
+      }
+
+      renderDiscussions(d.biggestDiscussions || [], 'biggest-discussions', 'biggest-section');
+      renderAiWatch(d.aiWatch || [], 'ai-watch', 'ai-section');
+      renderCyberWatch(d.cybersecurityWatch || [], 'cyber-watch', 'cyber-section');
+      renderAwsWatch(d.awsCloudWatch || [], 'aws-watch', 'aws-section');
+      renderTools(d.toolsPeopleAreTalkingAbout || [], 'tools-watch', 'tools-section');
+      renderCareer(d.cloudItCareerSignals || [], 'career-signals', 'career-section');
+      renderWatching(d.worthWatching || [], 'worth-watching', 'watch-section');
+      renderLearning(d.awsLearningOpportunity, 'learning-opportunity', 'learning-section');
+      renderVerification(d.verificationInformation || [], 'verification-info', 'verification-section');
+      renderQuality(d.researchQuality || {}, 'quality-metrics', 'quality-section', d.limitations);
+    }
+
+    function renderDiscussions(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <article class="card">
+          <div class="card-header">
+            <h3 class="card-title">${escapeHtml(item.title)}</h3>
+            <span class="category-tag">${escapeHtml(item.category)}</span>
+          </div>
+          <p>${escapeHtml(item.shortSummary)}</p>
+          <p><strong>Why it matters:</strong> ${escapeHtml(item.whyItMatters)}</p>
+          <p><strong>Reddit signal:</strong> ${escapeHtml(item.redditSignal)}</p>
+          <div class="links">
+            ${renderBadges(item)}
+            ${(item.sourceLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Source</a>`).join('')}
+            ${(item.redditLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Reddit</a>`).join('')}
+          </div>
+        </article>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderBadges(item) {
+      const status = item.verificationStatus || 'UNVERIFIED';
+      const conf = item.confidence || 'Low';
+      const statusClass = status.toLowerCase().replace(' ', '-');
+      const confClass = conf.toLowerCase();
+      return `
+        <span class="badge badge-${statusClass}">${escapeHtml(status)}</span>
+        <span class="badge badge-confidence-${confClass}">${escapeHtml(conf)} confidence</span>
+      `;
+    }
+
+    function renderAiWatch(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="card">
+          <strong>${escapeHtml(item.development)}</strong>
+          <span class="badge badge-verified" style="margin-left: 0.5rem;">${escapeHtml(item.status)}</span>
+          <p class="watch-meta">${escapeHtml(item.keyDetail)}</p>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderCyberWatch(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">${escapeHtml(item.vulnerability)}</h3>
+            <span class="category-tag">${escapeHtml(item.product)}</span>
+          </div>
+          <p><strong>CVE:</strong> <code>${escapeHtml(item.cve)}</code></p>
+          <p><strong>CISA KEV:</strong> ${escapeHtml(item.cisaKev)}</p>
+          <p><strong>Status:</strong> ${escapeHtml(item.status)}</p>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderAwsWatch(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">${escapeHtml(item.announcement)}</h3>
+            <span class="category-tag">${escapeHtml(item.type)}</span>
+          </div>
+          <p><strong>Date:</strong> ${escapeHtml(item.date)}</p>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderTools(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="tool-item">
+          <div>
+            <div class="tool-name">${escapeHtml(item.tool)}</div>
+            <div class="tool-use">${escapeHtml(item.whatItDoes)}</div>
+          </div>
+          <a href="${escapeHtml(item.officialSource)}" target="_blank" rel="noopener" style="font-size: 0.8rem;">Source</a>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderCareer(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="career-signal">${escapeHtml(item)}</div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderWatching(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="watch-item">
+          <div class="watch-title">${escapeHtml(item.topic)}</div>
+          <div class="watch-meta"><strong>Why:</strong> ${escapeHtml(item.why)}</div>
+          <div class="watch-meta"><strong>Evidence:</strong> ${escapeHtml(item.evidence)}</div>
+          <div class="watch-meta"><strong>Check tomorrow:</strong> ${escapeHtml(item.checkTomorrow)}</div>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderLearning(item, containerId, sectionId) {
+      if (!item) return;
+      const container = document.getElementById(containerId);
+      container.innerHTML = `
+        <div class="card">
+          <h3>${escapeHtml(item.topic)}</h3>
+          <p><strong>Why:</strong> ${escapeHtml(item.why)}</p>
+          <p><strong>Study:</strong> ${escapeHtml(item.study)}</p>
+        </div>
+      `;
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderVerification(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      if (!items.length) return;
+      container.innerHTML = items.map(item => `
+        <div class="verification-item">
+          <span>${escapeHtml(item.claim)}</span>
+          <span class="badge badge-${(item.verificationStatus || 'UNVERIFIED').toLowerCase().replace(' ', '-')}">${escapeHtml(item.verificationStatus)}</span>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderQuality(q, containerId, sectionId, limitations) {
+      const container = document.getElementById(containerId);
+      const metrics = [
+        { label: 'Primary Sources', value: q.primarySourcesChecked || 0 },
+        { label: 'Secondary Sources', value: q.secondarySourcesChecked || 0 },
+        { label: 'Community Sources', value: q.communitySourcesChecked || 0 },
+        { label: 'Verified Findings', value: q.verifiedFindings || 0 },
+        { label: 'Unverified Findings', value: q.unverifiedFindings || 0 },
+      ];
+      container.innerHTML = metrics.map(m => `
+        <div class="quality-item">
+          <div class="quality-label">${m.label}</div>
+          <div class="quality-value">${m.value}</div>
+        </div>
+      `).join('');
+      if (limitations) {
+        document.getElementById('limitations').textContent = limitations;
+      }
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
+        .replace(/'/g, '&#039;');
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
