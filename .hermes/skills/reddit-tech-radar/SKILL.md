@@ -38,19 +38,16 @@ The execution sequence is mandatory:
    - Report the failure and stop.
 4. If the quality gate passes:
    - Physically write data/reddit-tech-radar/latest.json.
-   - Physically create data/reddit-tech-radar/archive/YYYY-MM-DD.json.
-   - Validate both JSON files.
-   - Physically update index.html if the repository workflow requires it.
-   - Run git status.
-   - Run git diff and inspect the changes.
-   - Check that no secrets were introduced.
-   - git add the intended files.
-   - git commit using the required commit message.
-   - git push.
-   - Verify that the push succeeded.
-   - Verify the repository working tree/state after publication.
+   - Validate latest.json.
+   - DO NOT manually create or modify the dated archive.
+   - DO NOT manually perform the publication Git workflow.
+   - Run the permanent repository publisher:
+     powershell -ExecutionPolicy Bypass -File .\scripts\publish-reddit-tech-radar.ps1
+   - Treat the publisher output as the authoritative publication result.
+   - If the publisher succeeds, verify its reported archive, commit, push, and post-push state.
+   - If the publisher fails, report RESEARCH COMPLETE / PUBLICATION FAILED with its exact stage and evidence.
 
-A report is NOT considered successfully published unless the corresponding filesystem operations and Git operations actually succeed.
+A report is NOT considered successfully published unless the permanent repository publisher completes successfully and its filesystem, archive, Git, push, and post-push verification checks succeed.
 
 NEVER claim that a file was saved, updated, archived, committed, or pushed unless the corresponding command/tool operation actually succeeded.
 
@@ -449,20 +446,23 @@ important limitations
 
 Never inflate these numbers.
 
-EXECUTION METHOD  NO GENERATED AUTOMATION
+EXECUTION METHOD  NO AD-HOC AUTOMATION
 
-The agent MUST execute this workflow directly. Do NOT create Python, PowerShell, Bash, batch, JavaScript, or any other helper/automation scripts to perform research, publication, archiving, validation, Git operations, or verification.
+The agent MUST execute the research workflow directly. Do NOT create ad-hoc Python, PowerShell, Bash, batch, JavaScript, or other helper/automation scripts for research, discovery, report generation, validation, archiving, Git operations, or verification.
 
 Do NOT create files such as update_*.py, run_*.py, automation scripts, workflow records, backup copies, temporary files, or generated documentation unless SKILL.md explicitly requires that exact file.
 
-If direct execution of any required operation is not possible, STOP and report PUBLICATION FAILED. Never work around an instruction by generating a script that performs the prohibited operation.
+The permanent repository publisher is an explicit exception. The existing version-controlled file:
+- scripts/publish-reddit-tech-radar.ps1
+MUST be used for publication after latest.json has been written and validated. It MUST NOT be regenerated, replaced, or supplemented with another publication script during a run.
+
+If the permanent publisher cannot be executed, STOP and report PUBLICATION FAILED. Never work around it by generating another script.
 
 During publication, the ONLY repository data files permitted to be created or modified are:
 - data/reddit-tech-radar/latest.json
 - data/reddit-tech-radar/archive/YYYY-MM-DD.json
 
-The agent MUST NOT invent or reconstruct an alternative publication workflow from memory, previous runs, existing scripts, or prior reports. SKILL.md is the sole authoritative workflow.
-
+The agent MUST NOT invent or reconstruct an alternative publication workflow from memory, previous runs, existing reports, or prior failed runs. SKILL.md and the permanent publisher are the authoritative workflow.
 STRICT PUBLICATION CONTRACT
 
 The repository itself is the source of truth. Do not create temporary automation programs, helper scripts, generated Python files, wrapper scripts, or other executable files in the repository in order to perform this workflow unless such a file already exists in the repository and SKILL.md explicitly requires it.
