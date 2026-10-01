@@ -1,6 +1,6 @@
 {
   "publicationDate": "2026-10-01",
-  "generatedTimestamp": "2026-10-01T15:38:12Z",
+  "generatedTimestamp": "2026-10-01T16:06:37.276545Z",
   "researchVersion": "2.3.0",
   "summary": "Today's research highlights local AI agent frameworks like CrewAI, AWS certification resource sharing, VPC endpoint vs NAT Gateway cost analysis, Docker/Kubernetes learning demand, and a Zyxel access point command injection vulnerability.",
   "biggestDiscussions": [
@@ -21,7 +21,7 @@
     {
       "title": "AWS Certification Study Resource Sharing",
       "category": "AWS / Cloud",
-      "shortSummary": "Sharing and requesting comprehensive study guides for AWS certifications, including a \"Master List\" compilation of resources across all AWS exams.",
+      "shortSummary": "Sharing and requesting comprehensive study guides for AWS certifications, including a \\\"Master List\\\" compilation of resources across all AWS exams.",
       "whyItMatters": "Reflects ongoing demand for structured learning paths as professionals pursue AWS certifications for career advancement.",
       "redditSignal": "Active discussion in r/AWSCertifications with resource sharing and master list compilation.",
       "verificationStatus": "COMMUNITY REPORTED",
@@ -186,6 +186,6 @@
     "unverifiedFindings": 3,
     "limitations": "Reddit discovery limited to web search snippets; no direct post content extracted; verification relied on community reports with some primary source verification for cost analysis and CVE information."
   },
-  "lastUpdated": "2026-10-01T15:38:12Z",
+  "lastUpdated": "2026-10-01T16:06:37.276545Z",
   "researchDate": "2026-10-01"
 }
