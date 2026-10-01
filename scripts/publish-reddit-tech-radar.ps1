@@ -177,7 +177,7 @@ $expected = @(
     "data/reddit-tech-radar/latest.json"
 )
 
-if (($staged | Sort-Object) -join "`n" -ne ($expected | Sort-Object) -join "`n") {
+if ((($staged | Sort-Object) -join "`n") -ne (($expected | Sort-Object) -join "`n")) {
     Fail "Staged-file verification" "Staged files were: $($staged -join ', ')"
 }
 
@@ -256,3 +256,4 @@ Write-Host "Archive: $archive"
 Write-Host "SHA256: $latestHash"
 Write-Host "HEAD == origin/master: YES"
 Write-Host "Working tree: CLEAN"
+
