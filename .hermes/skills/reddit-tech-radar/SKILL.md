@@ -449,6 +449,20 @@ important limitations
 
 Never inflate these numbers.
 
+EXECUTION METHOD  NO GENERATED AUTOMATION
+
+The agent MUST execute this workflow directly. Do NOT create Python, PowerShell, Bash, batch, JavaScript, or any other helper/automation scripts to perform research, publication, archiving, validation, Git operations, or verification.
+
+Do NOT create files such as update_*.py, run_*.py, automation scripts, workflow records, backup copies, temporary files, or generated documentation unless SKILL.md explicitly requires that exact file.
+
+If direct execution of any required operation is not possible, STOP and report PUBLICATION FAILED. Never work around an instruction by generating a script that performs the prohibited operation.
+
+During publication, the ONLY repository data files permitted to be created or modified are:
+- data/reddit-tech-radar/latest.json
+- data/reddit-tech-radar/archive/YYYY-MM-DD.json
+
+The agent MUST NOT invent or reconstruct an alternative publication workflow from memory, previous runs, existing scripts, or prior reports. SKILL.md is the sole authoritative workflow.
+
 STRICT PUBLICATION CONTRACT
 
 The repository itself is the source of truth. Do not create temporary automation programs, helper scripts, generated Python files, wrapper scripts, or other executable files in the repository in order to perform this workflow unless such a file already exists in the repository and SKILL.md explicitly requires it.
