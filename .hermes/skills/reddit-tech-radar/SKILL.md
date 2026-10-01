@@ -15,6 +15,86 @@ C:\Users\Administrator\tech-reddit-radar
 
 The repository is the source of truth for this skill.
 
+MANDATORY EXECUTION CONTRACT
+
+This skill is an executable repository workflow, not a report-writing task.
+
+The final report shown in the Hermes response is NOT the deliverable.
+
+The deliverable is the physically updated Git repository.
+
+After research and the quality gate, you MUST continue executing the repository workflow using the available shell/filesystem/Git tools.
+
+You MUST NOT finish the run immediately after displaying the research report.
+
+The execution sequence is mandatory:
+
+1. Build the candidate report.
+2. Run the quality gate.
+3. If the quality gate fails:
+   - DO NOT modify latest.json.
+   - DO NOT create a new archive.
+   - DO NOT commit or push.
+   - Report the failure and stop.
+4. If the quality gate passes:
+   - Physically write data/reddit-tech-radar/latest.json.
+   - Physically create data/reddit-tech-radar/archive/YYYY-MM-DD.json.
+   - Validate both JSON files.
+   - Physically update index.html if the repository workflow requires it.
+   - Run git status.
+   - Run git diff and inspect the changes.
+   - Check that no secrets were introduced.
+   - git add the intended files.
+   - git commit using the required commit message.
+   - git push.
+   - Verify that the push succeeded.
+   - Verify the repository working tree/state after publication.
+
+A report is NOT considered successfully published unless the corresponding filesystem operations and Git operations actually succeed.
+
+NEVER claim that a file was saved, updated, archived, committed, or pushed unless the corresponding command/tool operation actually succeeded.
+
+NEVER describe a simulated, hypothetical, or intended file operation as a completed operation.
+
+NEVER write phrases such as:
+"simulated path"
+"would save"
+"would use"
+"actual save would"
+"publication would"
+when reporting a completed run.
+
+If a required filesystem, shell, or Git capability is unavailable, report:
+"Publication failed: required repository operation was unavailable."
+
+Do not pretend the operation succeeded.
+
+The final response must distinguish clearly between:
+
+RESEARCH COMPLETE
+and
+PUBLICATION COMPLETE
+
+Only report "PUBLICATION COMPLETE" after the repository and Git verification steps have actually succeeded.
+
+Before claiming successful completion, the final response MUST contain evidence from the actual execution that:
+- latest.json was written
+- the dated archive was written
+- the intended Git changes were committed
+- git push succeeded
+
+If any of these cannot be verified, the run is NOT a successful publication.
+
+VERIFICATION EVIDENCE RULE
+
+A finding may only be marked VERIFIED when the primary or authoritative source was actually accessed and checked during this run.
+
+A URL merely appearing in a search result, snippet, community post, or another article does NOT count as primary-source verification.
+
+If the underlying event is confirmed but the specific Reddit/X claim is not fully confirmed, use PARTIALLY VERIFIED.
+
+Do not invent verification evidence.
+
 Topics
 
 Research across:
