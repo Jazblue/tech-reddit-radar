@@ -157,6 +157,6 @@
     "unverifiedFindings": 2,
     "limitations": "Reddit discovery limited to web search snippets; no direct post content extracted; verification relied on community reports with some primary source verification for cost analysis and CVE information."
   },
-  "lastUpdated": "2026-10-01T14:35:31Z",
-  "researchDate": "2026-10-01"
+  "lastUpdated": "2026-10-01T16:30:00Z",
+    "researchDate": "2026-10-01"
 }
