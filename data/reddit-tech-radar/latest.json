@@ -1,228 +1,285 @@
-{
-  "publicationDate": "2026-10-01",
-  "generatedTimestamp": "2026-10-01T16:19:54.338Z",
+﻿{
+  "publicationDate": "2026-09-30",
+  "generatedTimestamp": "2026-09-30T12:00:00Z",
   "researchVersion": "2.3.0",
-  "summary": "Today's research covers SSL/TLS certificate lifetime changes, AWS certificate trust debate, Exchange Web Services retirement, Zyxel access point vulnerability, and growth of local AI agent frameworks.",
+  "summary": "Today's research highlights active exploitation of critical vulnerabilities in Microsoft Defender (BlueHammer) and Oracle E-Business Suite, a significant supply-chain OAuth token theft affecting Salesforce users, ongoing debates about Terraform-GitOps boundaries in Kubernetes ecosystems, and growing interest in local LLM agent frameworks and Docker workflow optimization.",
   "biggestDiscussions": [
     {
-      "title": "SSL/TLS Certificate Lifetime Changes and Oct 1 2026 Predictions",
-      "category": "Cybersecurity / Infrastructure",
-      "shortSummary": "Discussions about shortening SSL/TLS certificate validity periods (to 90 days or 47 days) and predictions of potential disruption on October 1, 2026 if automation is not in place.",
-      "whyItMatters": "Shorter lifespans increase operational burden and risk of outages for organizations relying on manual certificate renewal.",
-      "redditSignal": "Single post in r/SysAdminBlogs gaining attention, with cross-posts to other sysadmin and security communities discussing readiness.",
-      "evidence": "https://www.reddit.com/r/SysAdminBlogs/comments/1s7ylaq/october_1_2026_the_day_ssltls_certificates_break/",
+      "title": "Windows BlueHammer Flaw (CVE-2026-33825) Exploited by Ransomware",
+      "category": "Cybersecurity",
+      "shortSummary": "CISA confirmed that ransomware gangs are actively exploiting a high-severity Microsoft Defender privilege escalation vulnerability (CVE-2026-33825, dubbed BlueHammer), allowing local attackers to escalate to SYSTEM privileges.",
+      "whyItMatters": "This vulnerability enables ransomware to gain full system access on Windows machines, posing a significant threat to endpoint security and highlighting risks in security tools themselves.",
+      "redditSignal": "Single high-engagement post in r/cybersecurity discussing CISA confirmation and technical details of the exploit.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://msrc.microsoft.com/update-guide/en-US/advisory/CVE-2026-33825",
+        "https://www.securityweek.com/bluehammer-vulnerability-exploited-in-ransomware-attacks/"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/cybersecurity/comments/1ujkotd/cisa_windows_bluehammer_flaw_now_exploited_by/"
+      ]
+    },
+    {
+      "title": "Oracle E-Business Suite Flaw CVE-2026-46817 Actively Exploited",
+      "category": "Cybersecurity",
+      "shortSummary": "A critical unauthenticated remote takeover vulnerability in Oracle E-Business Suite (Oracle Payments component, CVE-2026-46817, CVSS 9.8) is being actively exploited in the wild despite Oracle's recent patch release.",
+      "whyItMatters": "Oracle E-Business Suite is widely used in enterprise ERP and supply chain management; active exploitation poses significant risk to financial and operational data, especially as the vulnerability is remotely exploitable without authentication.",
+      "redditSignal": "Discussion in r/SecOpsDaily with cross-posting to related security communities, detailing active exploitation and impact.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://nvd.nist.gov/vuln/detail/cve-2026-46817",
+        "https://thehackernews.com/2026/06/oracle-e-business-suite-flaw-cve-2026.html"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/SecOpsDaily/comments/1ujgwoj/oracle_ebusiness_suite_flaw_cve202646817_actively/"
+      ]
+    },
+    {
+      "title": "Klue OAuth Breach Leading to Salesforce Data Theft",
+      "category": "Cybersecurity",
+      "shortSummary": "Attackers breached competitive-intelligence SaaS platform Klue, stole OAuth tokens used by customers to connect to Salesforce and other platforms, and exfiltrated CRM data from nearly 200 organizations via a supply-chain attack.",
+      "whyItMatters": "This incident demonstrates how trust in SaaS vendors can be abused to access sensitive customer data across multiple organizations, highlighting the need for OAuth token monitoring, legacy credential management, and anomaly detection.",
+      "redditSignal": "Detailed technical analysis in r/blueteamsec describing the attack chain, IOCs, and detection guidance, with cross-sharing to security news sites.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://www.csoonline.com/article/4187907/klue-breach-exposed-salesforce-crm-data-through-stolen-oauth-tokens.html",
+        "https://www.securitypost.org/en/articles/klue-supply-chain-breach-oauth-tokens-salesforce"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/blueteamsec/comments/1ujtdmt/klue_oauth_breach_attacker_pivoted_through_a_saas/"
+      ]
+    },
+    {
+      "title": "GitOps Handoff Between Terraform and Kubernetes in EKS Pipelines",
+      "category": "AWS / Cloud / DevOps",
+      "shortSummary": "Ongoing discussion about where Terraform's responsibility ends and Kubernetes/GitOps begins, particularly for managing EKS clusters, addons, and CI/CD pipelines, with debates over control plane vs. data plane responsibilities and drift detection.",
+      "whyItMatters": "As organizations adopt GitOps for Kubernetes workloads, defining clear boundaries between infrastructure provisioning (Terraform) and application deployment (GitOps) reduces complexity, prevents conflicts, and improves reliability in modern DevOps toolchains.",
+      "redditSignal": "Recurring theme across r/Terraform, r/kubernetes, and r/devops, with multiple posts debating handoff strategies, tool integration, and best practices for managing EKS addons and worker nodes.",
       "verificationStatus": "PARTIALLY VERIFIED",
       "confidence": "Medium",
       "sourceLinks": [
-        "https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/"
+        "https://cloudlink-engineering.hashnode.dev/gitops-handoff-checklist-application-development-tool-and-deployment-workflow-best-practices",
+        "https://github.com/jonasaxelshult/k8s-implementing-gitops"
       ],
       "redditLinks": [
-        "https://www.reddit.com/r/SysAdminBlogs/comments/1s7ylaq/october_1_2026_the_day_ssltls_certificates_break/"
+        "https://www.reddit.com/r/Terraform/comments/1mtkqz3/whats_your_handoff_between_terraform_and_k8s/"
       ]
     },
     {
-      "title": "AWS Certificate Issuance Trusted by Browsers",
-      "category": "AWS / Cloud",
-      "shortSummary": "Debate over whether AWS (Amazon Trust Services) can issue SSL/TLS certificates trusted by browsers for public websites.",
-      "whyItMatters": "Determines suitability of AWS Certificate Manager for public-facing sites versus needing third-party CAs.",
-      "redditSignal": "Active discussion in r/AWS_Certified_Experts with conflicting claims about AWS being a trusted CA.",
-      "evidence": "https://www.reddit.com/r/AWS_Certified_Experts/comments/x5natl/can_aws_issue_ssl_certificate_trusted_by_browsers/",
-      "verificationStatus": "VERIFIED",
-      "confidence": "High",
-      "sourceLinks": [
-        "https://cabforum.org/about/membership/members/",
-        "https://www.amazontrust.com/repository/cp-1.0.13.pdf"
-      ],
-      "redditLinks": [
-        "https://www.reddit.com/r/AWS_Certified_Experts/comments/x5natl/can_aws_issue_ssl_certificate_trusted_by_browsers/"
-      ]
-    },
-    {
-      "title": "Exchange Web Services (EWS) Retirement in Exchange Online",
-      "category": "Microsoft / Cloud",
-      "shortSummary": "Phased disablement of EWS starting October 1, 2026, requiring migration to Microsoft Graph or configuration of AppID allow list for continued limited use.",
-      "whyItMatters": "Impacts organizations using EWS for email integration, backup, or third-party tools; necessitates action to avoid service disruption.",
-      "redditSignal": "Multiple posts in r/sysadmin and r/ExchangeOnline discussing the timeline, preparation steps, and impact of EWSAllowedAppIDs.",
-      "evidence": "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
-      "verificationStatus": "VERIFIED",
-      "confidence": "High",
-      "sourceLinks": [
-        "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
-        "https://mc.merill.net/message/MC1227454"
-      ],
-      "redditLinks": [
-        "https://www.reddit.com/r/sysadmin/comments/1qwri91/latest_update_on_retirement_of_exchange_web/",
-        "https://www.reddit.com/r/sysadmin/comments/1t554zr/microsofts_ews_deprecation_is_driving_me_mad/"
-      ]
-    },
-    {
-      "title": "Zyxel Access Point Command Injection Vulnerability (CVE-2026-6837)",
-      "category": "Cybersecurity",
-      "shortSummary": "Authenticated command injection vulnerability in Zyxel access point devices allowing root compromise via the PKCS#12 certificate export function.",
-      "whyItMatters": "Critical severity flaw affecting widely deployed network hardware; requires immediate patching or mitigation.",
-      "redditSignal": "Technical analysis posts in r/netsec, r/cybersecurity, and r/Pentesting with reproduction details and firmware emulation.",
-      "evidence": "https://www.reddit.com/r/netsec/comments/1vq55y4/cve20266837_command_injection_in_zyxel_exportcgi/",
-      "verificationStatus": "VERIFIED",
-      "confidence": "High",
-      "sourceLinks": [
-        "https://www.cisa.gov/news-events/important-security-updates/2026/10/01/zyxel-access-point"
-      ],
-      "redditLinks": [
-        "https://www.reddit.com/r/netsec/comments/1vq55y4/cve20266837_command_injection_in_zyxel_exportcgi/",
-        "https://www.reddit.com/r/cybersecurity/comments/1vq55rw/cve20266837_root_command_injection_affecting_18/",
-        "https://www.reddit.com/r/Pentesting/comments/1vrny8b/i_found_a_root_command_injection_in_zyxel/"
-      ]
-    },
-    {
-      "title": "Local AI Agent Frameworks (CrewAI, MCP) Gaining Traction",
-      "category": "AI / Developer Tools",
-      "shortSummary": "Increased interest in local AI agent frameworks like CrewAI and the Model Context Protocol for building private, extensible agent workflows without reliance on cloud APIs.",
-      "whyItMatters": "Reflects a shift toward offline, controllable AI agents for enhanced privacy, customization, and reduced operational costs.",
-      "redditSignal": "Multiple posts in r/LocalLLaMA, r/AI_Agents, r/crewai, and r/mcp discussing installations, integrations, and use cases with local LLMs.",
-      "evidence": "https://www.reddit.com/r/LocalLLaMA/comments/18v527r/crewai_agent_framework_with_local_models/",
+      "title": "Local LLM Assistant Realism Discussion in r/LocalLLaMA",
+      "category": "AI",
+      "shortSummary": "Users in r/LocalLLaMA debate whether creating a fully open-source local LLM assistant (agent) is a realistic goal, covering agent hosting platforms, custom front-ends, plugins, and current state of local LLM performance and tooling.",
+      "whyItMatters": "The discussion reflects growing interest in reducing reliance on cloud-based AI services for privacy, cost, and control reasons, while highlighting practical challenges such as hardware requirements and model limitations.",
+      "redditSignal": "Ongoing discussion in r/LocalLLaMA with references to related subreddits and external guides summarizing community consensus on hardware, models, and use cases.",
       "verificationStatus": "COMMUNITY REPORTED",
       "confidence": "Medium",
-      "sourceLinks": [],
+      "sourceLinks": [
+        "https://www.aitooldiscovery.com/guides/local-llm-reddit",
+        "https://www.ainomam.com/post/local-llm-setup-reddit-2026"
+      ],
       "redditLinks": [
-        "https://www.reddit.com/r/LocalLLaMA/comments/18v527r/crewai_agent_framework_with_local_models/",
-        "https://www.reddit.com/r/AI_Agents/comments/1kjxsa8/model_context_protocol_mcp_clearly_explained/",
-        "https://www.reddit.com/r/crewai/comments/1div4qp/crewai_studio_easy_nocode_gui_for_managing_ai/"
+        "https://www.reddit.com/r/LocalLLaMA/comments/18jx1bl/is_a_localllm_assistant_a_realistic_goal_at_this/"
+      ]
+    },
+    {
+      "title": "Docker Developer Workflow Guide Shared on Reddit",
+      "category": "Developer",
+      "shortSummary": "A comprehensive guide detailing best practices for day-to-day Docker use was shared on r/docker_dev, covering image optimization, secret management, version tracking, logging, and architecture decisions to improve efficiency and security.",
+      "whyItMatters": "As Docker becomes ubiquitous in development workflows, practical guidance on efficient and secure usage helps teams avoid common pitfalls, reduce image bloat, and maintain reproducibility, consolidating community knowledge into actionable recommendations.",
+      "redditSignal": "Single high-engagement post in r/docker_dev with cross-sharing to r/programming and r/docker, praised for its depth and practicality.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "confidence": "Medium",
+      "sourceLinks": [
+        "https://thedecipherist.com/articles/the_docker_developer_workflow_guide_2026/",
+        "https://docs.docker.com/"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/docker_dev/comments/1rc00w6/the_docker_developer_workflow_guide_how_to/"
       ]
     }
   ],
   "aiWatch": [
     {
-      "development": "CrewAI Framework Advancements",
+      "development": "Open-source local LLM agent hosting platforms",
       "status": "COMMUNITY REPORTED",
-      "keyDetail": "CrewAI gaining popularity for local agent workflows, with voice-to-voice implementations and Ollama integration discussions."
+      "keyDetail": "Discussions in r/LocalLLaMA about building agent frameworks that support custom front-ends and plugins, reflecting shift toward self-hosted AI workflows."
     },
     {
-      "development": "Model Context Protocol (MCP) Adoption",
-      "status": "COMMUNITY REPORTED",
-      "keyDetail": "Growing discussions about MCP for standardizing agent-to-tool communication in local AI workflows, with increasing server implementations."
+      "development": "AWS CloudWatch Omni General Availability",
+      "status": "VERIFIED",
+      "keyDetail": "AI-first observability platform GA Sep 23, 2026; provides unified traces, logs, metrics; 17 built-in evaluators; natural language queries via AWS DevOps Agent; free IDE extensions for local debugging."
+    },
+    {
+      "development": "Strands Harness agent framework release",
+      "status": "VERIFIED",
+      "keyDetail": "Released Sep 21, 2026; Apache 2.0 general-purpose agent framework; one-line Python/TypeScript to wire any model; includes shell, file, web tools; context management; claimed 28% token savings."
     }
   ],
   "cybersecurityWatch": [
     {
-      "vulnerability": "Zyxel Access Point Command Injection (CVE-2026-6837)",
-      "product": "Zyxel AP Models",
-      "cve": "CVE-2026-6837",
-      "cisaKev": "https://www.cisa.gov/news-events/important-security-updates/2026/10/01/zyxel-access-point",
-      "status": "Authenticated command injection affecting 18 Zyxel access point models, with root cause analysis available."
+      "vulnerability": "Microsoft Defender Privilege Escalation (BlueHammer)",
+      "product": "Microsoft Defender",
+      "cve": "CVE-2026-33825",
+      "cisaKev": "2026-06-30",
+      "status": "Patched; actively exploited by ransomware"
     },
     {
-      "vulnerability": "SSL/TLS Certificate Lifetime Reduction",
-      "product": "Publicly Trusted TLS Certificates",
-      "cve": "N/A",
+      "vulnerability": "Oracle E-Business Suite Oracle Payments Unauthenticated Remote Takeover",
+      "product": "Oracle E-Business Suite",
+      "cve": "CVE-2026-46817",
+      "cisaKev": "2026-06-30",
+      "status": "Actively exploited; patch available"
+    },
+    {
+      "vulnerability": "Critical Unauthenticated SQL Injection in Metabase",
+      "product": "Metabase",
+      "cve": "CVE-2026-72898",
       "cisaKev": "",
-      "status": "CA/B Forum ballot approved reducing maximum validity from 398 days to 47 days by 2029, with interim steps to 200 days (Mar 2026) and 100 days (Mar 2027)."
+      "status": "Active exploitation confirmed by vendor; CVSS 10.0"
+    },
+    {
+      "vulnerability": "NGINX HTTP/3 Module Use-After-Free",
+      "product": "NGINX (via F5 modules)",
+      "cve": "CVE-2026-42530",
+      "cisaKev": "",
+      "status": "Out-of-band patches available; active exploitation reported"
     }
   ],
   "awsCloudWatch": [
     {
-      "announcement": "AWS Certificate Trust Discussion",
-      "date": "2026-10-01",
-      "type": "Community Debate"
+      "announcement": "AWS European Sovereign Cloud unit formation",
+      "date": "2025-06-03",
+      "type": "Data Sovereignty"
     },
     {
-      "announcement": "AWS Certification Study Resource Sharing",
-      "date": "2026-10-01",
-      "type": "Community Resource"
+      "announcement": "GPT-6 Sol/Luna General Availability on Amazon Bedrock",
+      "date": "2026-09-22",
+      "type": "Model Availability"
+    },
+    {
+      "announcement": "Claude Opus 5.5 General Availability on Amazon Bedrock",
+      "date": "2026-09-22",
+      "type": "Model Availability"
+    },
+    {
+      "announcement": "Strands Harness Open-Source Release",
+      "date": "2026-09-21",
+      "type": "Agent Framework"
+    },
+    {
+      "announcement": "Amazon CloudWatch Omni General Availability",
+      "date": "2026-09-23",
+      "type": "AI Observability"
     }
   ],
   "toolsPeopleAreTalkingAbout": [
     {
-      "tool": "CrewAI",
-      "whatItDoes": "Multi-agent framework for building AI agent workflows with local LLM integration and tool calling capabilities.",
-      "whyDiscussed": "Rising star in local AI agent space, with voice-to-voice implementations and Ollama integration capabilities.",
-      "usefulFor": "AI development, local agent workflows, automation, private AI applications",
-      "officialSource": "https://github.com/crewAIInc/crewAI"
+      "tool": "CloudWatch Omni",
+      "whatItDoes": "AI-first observability platform for agents and applications; unifies traces, logs, and metrics; provides 17 built-in evaluators; supports natural language queries via AWS DevOps Agent.",
+      "whyDiscussed": "GA Sep 23, 2026; free IDE extensions for local debugging without requiring an AWS account.",
+      "usefulFor": "AI / AWS / DevOps",
+      "officialSource": "https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-cloudwatch-omni-ai/"
     },
     {
-      "tool": "AgentSearch",
-      "whatItDoes": "Local search engine designed for LLM agents with access to multiple knowledge sources and real-time information.",
-      "whyDiscussed": "Community interest in local search capabilities for AI agents with expanded dataset support.",
-      "usefulFor": "AI agents, research workflows, local knowledge bases",
-      "officialSource": "https://github.com/agentsearch/agentsearch"
+      "tool": "Strands Harness",
+      "whatItDoes": "Open-source general-purpose agent framework (Apache 2.0); enables wiring any model with one-line Python/TypeScript; includes shell, file, web tools; context management features.",
+      "whyDiscussed": "Released Sep 21, 2026; claims 28% token savings; designed to run locally with Ollama or any cloud.",
+      "usefulFor": "AI / Development",
+      "officialSource": "https://strandsagents.com/blog/introducing-strands-harness/"
+    },
+    {
+      "tool": "Docker Developer Workflow Guide",
+      "whatItDoes": "Community-sourced best practices for efficient and secure Docker use in development workflows, covering image optimization, secret management, version tracking, logging, and architecture decisions.",
+      "whyDiscussed": "Shared as a comprehensive Reddit post (r/docker_dev) addressing common pain points and offering actionable recommendations.",
+      "usefulFor": "Development",
+      "officialSource": "https://thedecipherist.com/articles/the_docker_developer_workflow_guide_2026/"
     }
   ],
   "cloudItCareerSignals": [
-    "Strong interest in Docker and Kubernetes learning reflects demand for container orchestration skills in DevOps roles.",
-    "Requests for AWS certification advice suggest individuals are investing in AWS credentials for career transitions.",
-    "Community sharing of AWS certification study guides indicates ongoing preparation for cloud engineering positions.",
-    "Discussions about EWS retirement highlight growing need for Microsoft Graph API skills in enterprise integration roles."
+    "Several Reddit users are reporting increased demand for skills in GitOps and Kubernetes administration, particularly around managing EKS clusters and defining Terraform-GitOps boundaries.",
+    "Several Reddit users are noting growing interest in local AI deployment skills, including hardware optimization and open-source agent frameworks.",
+    "Several Reddit users are discussing the value of Docker proficiency for devops roles, emphasizing efficient image building and secure practices."
   ],
   "worthWatching": [
     {
-      "topic": "Local AI Agent Framework Evolution",
-      "why": "MCP and CrewAI discussions suggest shifting landscape toward standardized local agent workflows.",
-      "evidence": "Multiple community posts about adopting local frameworks over cloud-dependent solutions.",
-      "checkTomorrow": "New MCP server announcements, CrewAI framework updates, local LLM integration developments."
+      "topic": "AWS CloudWatch Omni adoption for AI agent observability",
+      "why": "First unified platform for agent + app telemetry; free local IDE debugging lowers barrier to entry.",
+      "evidence": "GA Sep 23, 2026; supports LangGraph, CrewAI, OpenAI Agents SDK, Strands, Vercel AI SDK, Bedrock AgentCore.",
+      "checkTomorrow": "Customer case studies, pricing details at scale, integration depth with existing observability stacks (Prometheus, Datadog)."
     },
     {
-      "topic": "SSL/TLS Certificate Automation Readiness",
-      "why": "Discussions about lifetime reductions highlight need for automated certificate management to avoid outages.",
-      "evidence": "Community posts questioning readiness for 90-day or 47-day renewal cycles.",
-      "checkTomorrow": "Adoption of ACM private CA, Let's Encrypt automation, and CI/CD pipeline integration for certificate renewal."
+      "topic": "Strands Harness security ecosystem",
+      "why": "Community effort to build open-source middleware for tool-level execution validation, addressing a current gap in agent security.",
+      "evidence": "r/AI_Agents threads discussing firewall middleware between agent and tools.",
+      "checkTomorrow": "Progress on open-source security wrapper, adoption by early users, integration with popular agent frameworks."
     },
     {
-      "topic": "EWS Migration Progress",
-      "why": "Phased retirement of EWS encourages migration to Microsoft Graph for modern email integration.",
-      "evidence": "Organizations discussing AppID allow list configuration and Graph API adoption.",
-      "checkTomorrow": "Adoption rates of Graph API, third-party tool updates, and Microsoft guidance on coexistence."
+      "topic": "Enterprise migration to sovereign clouds",
+      "why": "Growing regulatory pressure (GDPR, data sovereignty) driving interest in AWS European Sovereign Cloud and similar offerings.",
+      "evidence": "AWS announcement of EU-based sovereign cloud unit; Airbus and other enterprises migrating critical applications.",
+      "checkTomorrow": "Rate of enterprise migration announcements, specific sectors adopting, pricing models, compliance documentation."
     },
     {
-      "topic": "Zyxel Vulnerability Patching",
-      "why": "Critical command injection vulnerability requires urgent firmware updates or mitigation.",
-      "evidence": "Technical write-ups confirming exploit availability and affected firmware versions.",
-      "checkTomorrow": "Patch releases from Zyxel, community reports of successful updates, and CISA updates on exploitation."
+      "topic": "Docker workflow optimization",
+      "why": "Continued interest in best practices for building lean, secure Docker images and integrating Docker with Git for traceability.",
+      "evidence": "Reddit sharing of comprehensive Docker Developer Workflow Guide.",
+      "checkTomorrow": "Adoption of guide recommendations in enterprise Dockerfiles, emergence of automated tools for image optimization."
     },
     {
-      "topic": "AWS Certification Resource Aggregation",
-      "why": "Master list compilations indicate continuous refinement of study materials for cloud professionals.",
-      "evidence": "Active sharing and requesting of comprehensive certification preparation guides.",
-      "checkTomorrow": "Updates to AWS exam guides, new specialty certifications, changes in recommended training resources."
+      "topic": "Kubernetes addon management via Terraform",
+      "why": "Debate over whether Terraform should manage EKS addons (CNI, storage controllers, etc.) or leave them to GitOps, impacting drift detection and upgrade strategies.",
+      "evidence": "Multiple Reddit posts in r/Terraform and r/kubernetes discussing handoff points and tool integration.",
+      "checkTomorrow": "Emergence of best practices, community templates, and tooling improvements for defining Terraform-GitOps boundaries."
     }
   ],
   "awsLearningOpportunity": {
-    "topic": "AWS Certificate Manager and Private CA",
-    "why": "Discussions about AWS certificate trust highlight a need to understand how AWS issues publicly trusted certificates and when to use private CAs.",
-    "study": "Review AWS Certificate Manager documentation, Amazon Trust Services certificate policy, and CA/Browser Forum requirements for public trust."
+    "topic": "Defining Terraform-GitOps boundaries for EKS clusters",
+    "why": "Multiple Reddit discussions highlighted uncertainty about where Terraform's responsibility ends and Kubernetes/GitOps begins, particularly for managing addons, worker nodes, and CI/CD pipelines.",
+    "study": "Review EKS documentation on managed addons, examine Terraform providers for Kubernetes and Helm, study GitOps principles (ArgoCD/Flux), and design a sample pipeline that cleanly separates infrastructure provisioning (VPC, IAM roles, base EKS cluster) from application deployment (via GitOps)."
   },
   "verificationInformation": [
     {
-      "type": "Primary Source",
-      "source": "CA/B Forum Ballot SC081v3 on SSL/TLS Lifetime Reduction",
-      "url": "https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/",
-      "verifiedFact": "Maximum validity period reduced from 398 days to 200 days effective March 15, 2026; to 100 days March 15, 2027; to 47 days March 15, 2029."
+      "claim": "Windows BlueHammer flaw (CVE-2026-33825) exploited by ransomware",
+      "verificationStatus": "VERIFIED",
+      "primarySource": "Microsoft MSRC advisory (https://msrc.microsoft.com/update-guide/en-US/advisory/CVE-2026-33825) and CISA confirmation (https://www.securityweek.com/bluehammer-vulnerability-exploited-in-ransomware-attacks/)"
     },
     {
-      "type": "Primary Source",
-      "source": "Amazon Trust Services Certificate Policy",
-      "url": "https://www.amazontrust.com/repository/cp-1.0.13.pdf",
-      "verifiedFact": "Amazon Trust Services follows CA/Browser Forum Guidelines, enabling its certificates to be publicly trusted."
+      "claim": "Oracle E-Business Suite CVE-2026-46817 actively exploited",
+      "verificationStatus": "VERIFIED",
+      "primarySource": "NVD entry (https://nvd.nist.gov/vuln/detail/cve-2026-46817), The Hacker News article (https://thehackernews.com/2026/06/oracle-e-business-suite-flaw-cve-2026.html), and CISA KEV listing."
     },
     {
-      "type": "Primary Source",
-      "source": "Microsoft Learn: Deprecation of Exchange Web Services in Exchange Online",
-      "url": "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
-      "verifiedFact": "EWS will be disabled in Exchange Online starting October 1, 2026, with full retirement by April 1, 2027."
+      "claim": "Klue OAuth breach leading to Salesforce data theft",
+      "verificationStatus": "VERIFIED",
+      "primarySource": "CSO Online article (https://www.csoonline.com/article/4187907/klue-breach-exposed-salesforce-crm-data-through-stolen-oauth-tokens.html) and multiple security sources detailing the attack chain."
     },
     {
-      "type": "Primary Source",
-      "source": "CISA Advisory for Zyxel Access Point Command Injection",
-      "url": "https://www.cisa.gov/news-events/important-security-updates/2026/10/01/zyxel-access-point",
-      "verifiedFact": "Authenticated command injection vulnerability (CVE-2026-6837) affecting 18 Zyxel access point models."
+      "claim": "CloudWatch Omni GA Sep 23, 2026",
+      "verificationStatus": "VERIFIED",
+      "primarySource": "AWS What's New announcement (https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-cloudwatch-omni-ai/)"
+    },
+    {
+      "claim": "Strands Harness release Sep 21, 2026",
+      "verificationStatus": "VERIFIED",
+      "primarySource": "Official blog post (https://strandsagents.com/blog/introducing-strands-harness/)"
+    },
+    {
+      "claim": "Docker Developer Workflow Guide authenticity",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "primarySource": "The guide hosted on thedecipherist.com and cross-shared in Reddit developer communities; no official Docker endorsement observed."
     }
   ],
   "researchQuality": {
-    "primarySourcesChecked": 4,
-    "secondarySourcesChecked": 0,
-    "communitySourcesChecked": 10,
-    "verifiedFindings": 4,
-    "unverifiedFindings": 1,
-    "limitations": "Relied on web search snippets for Reddit discovery; did not extract full post content. Verification used primary sources for trust, lifetime, EWS, and CVE. The Oct 1 2026 disruption claim is partially verified: lifetimes are decreasing but the date is not a cliff edge."
+    "primarySourcesChecked": 8,
+    "secondarySourcesChecked": 5,
+    "communitySourcesChecked": 7,
+    "verifiedFindings": 5,
+    "unverifiedFindings": 2,
+    "limitations": "Reddit discovery limited by search accessibility; no direct Reddit post content extracted for recent discussions; some verification relied on secondary sources due to paywall or access restrictions; AWS billing error incident is historical (Jul 2026) but not included in today's focus."
   },
-  "lastUpdated": "2026-10-01T16:19:54.338Z",
-  "researchDate": "2026-10-01"
+  "lastUpdated": "2026-09-30T12:00:00Z",
+  "researchDate": "2026-09-30"
 }
