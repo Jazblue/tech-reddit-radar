@@ -449,6 +449,110 @@ important limitations
 
 Never inflate these numbers.
 
+STRICT PUBLICATION CONTRACT
+
+The repository itself is the source of truth. Do not create temporary automation programs, helper scripts, generated Python files, wrapper scripts, or other executable files in the repository in order to perform this workflow unless such a file already exists in the repository and SKILL.md explicitly requires it.
+
+The final report in the Hermes response is NOT the deliverable. The deliverable is the physically updated repository.
+
+After the quality gate passes, the publication sequence MUST be:
+
+1. Generate the complete report in memory.
+2. Validate the report JSON before touching the existing published file.
+3. Confirm publicationDate equals today's UTC date.
+4. Confirm generatedTimestamp is current for this run.
+5. Confirm required sections and source URLs exist.
+6. Confirm the quality gate passes.
+7. Write data/reddit-tech-radar/latest.json.
+8. Immediately create data/reddit-tech-radar/archive/YYYY-MM-DD.json as an exact copy of that newly written latest.json.
+9. Validate both JSON files independently.
+10. Compare SHA-256 hashes of latest.json and the dated archive. They MUST be identical.
+11. Confirm both files contain today's publicationDate and the same generatedTimestamp.
+12. Run git status --short.
+13. Inspect git diff -- data/reddit-tech-radar/latest.json data/reddit-tech-radar/archive/YYYY-MM-DD.json.
+14. Confirm ONLY the intended latest.json and dated archive are changed by this publication. Unexpected generated files, helper scripts, temporary files, or unrelated modifications MUST cause publication to fail.
+15. Check the intended files for secrets or credentials.
+16. Stage ONLY the intended latest.json and dated archive.
+17. Verify the staged diff.
+18. Commit using EXACTLY: Update Reddit Tech Radar - YYYY-MM-DD
+19. Verify the commit succeeded and contains the intended files.
+20. Push to the configured GitHub remote.
+21. Verify the push succeeded.
+22. Run git status --short again.
+23. Verify HEAD and origin point to the same commit.
+24. Only then report PUBLICATION COMPLETE.
+
+ARCHIVE INTEGRITY RULE
+
+The dated archive MUST represent the exact report published in latest.json for that run.
+
+Do not copy an existing archive into the new date.
+Do not preserve an old archive merely because it already exists.
+Do not create the archive before latest.json has been successfully written.
+
+If the archive cannot be written, validated, or matched to latest.json:
+
+- publication has failed
+- do not claim success
+- report the failure
+- do not continue to commit/push
+
+GIT INTEGRITY RULE
+
+A successful git commit or push does NOT by itself prove that the report workflow succeeded.
+
+The exact commit message MUST be:
+
+Update Reddit Tech Radar - YYYY-MM-DD
+
+Replace YYYY-MM-DD with the actual publication date.
+
+Before claiming publication complete, verify:
+
+- the commit exists
+- the commit contains the intended latest.json
+- the commit contains the intended dated archive
+- the push succeeded
+- local HEAD matches origin
+- no unexpected generated files were introduced
+
+If any of these checks fail, report:
+
+PUBLICATION FAILED
+
+Do not describe the run as successfully published.
+
+UNEXPECTED FILE RULE
+
+If git status shows an unexpected file such as run_automation.py, *.tmp, *.bak, temporary research files, generated scripts, credentials, or unrelated working-tree changes, do not add it merely to make the working tree clean.
+
+Do not delete an unexpected pre-existing user file automatically.
+
+Instead, stop publication and report the unexpected file.
+
+A backup file that existed before the run is not part of the publication and must never be staged.
+
+PROGRESS ACCURACY RULE
+
+Do not announce Publishing report, Updating archive, Git commit/push, or Complete until the corresponding physical operation has actually succeeded.
+
+The final response MUST contain two separate states:
+
+RESEARCH COMPLETE
+
+and
+
+PUBLICATION COMPLETE
+
+Only use PUBLICATION COMPLETE when all filesystem, archive, validation, Git, push, and post-push verification checks above have succeeded.
+
+If research succeeds but publication fails, report:
+
+RESEARCH COMPLETE
+PUBLICATION FAILED
+
+and include the exact failed stage and evidence.
+
 Publishing Safety
 
 Never destroy a valid published report because today's research failed.
