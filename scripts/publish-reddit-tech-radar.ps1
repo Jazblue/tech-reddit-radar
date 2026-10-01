@@ -211,7 +211,7 @@ if ($actualMessage -ne $commitMessage) {
 
 $commitFiles = @(git diff-tree --no-commit-id --name-only -r HEAD)
 
-if (($commitFiles | Sort-Object) -join "`n" -ne ($expected | Sort-Object) -join "`n") {
+if ((($commitFiles | Sort-Object) -join "`n") -ne (($expected | Sort-Object) -join "`n")) {
     Fail "Commit verification" "Commit contains: $($commitFiles -join ', ')"
 }
 
@@ -256,4 +256,5 @@ Write-Host "Archive: $archive"
 Write-Host "SHA256: $latestHash"
 Write-Host "HEAD == origin/master: YES"
 Write-Host "Working tree: CLEAN"
+
 
