@@ -132,13 +132,13 @@ Discovery
 
 Normally allocate up to:
 
-5–6 Reddit searches
-2–3 X/Twitter searches
+5â€“6 Reddit searches
+2â€“3 X/Twitter searches
 Verification
 
 Reserve approximately:
 
-3–4 searches for verification
+3â€“4 searches for verification
 
 The exact allocation can change depending on the strength of the initial findings.
 
@@ -146,11 +146,11 @@ Never exceed 12 total searches.
 
 Stop searching early when sufficient high-quality evidence has been collected.
 
-The target is normally 8–12 useful final findings.
+The target is normally 8â€“12 useful final findings.
 
 It is better to publish fewer strong findings than pad the report with weak, repetitive, old, or unverified material.
 
-Phase 1 — Reddit Discovery
+Phase 1 â€” Reddit Discovery
 
 Reddit is the primary community discovery source.
 
@@ -184,7 +184,7 @@ Do not assume a search-result snippet proves the claim.
 
 Do not use old evergreen Reddit posts as evidence of today's activity.
 
-Phase 2 — X / Twitter Discovery
+Phase 2 â€” X / Twitter Discovery
 
 Use X/Twitter as a secondary real-time discovery source when available.
 
@@ -220,7 +220,7 @@ Continue using Reddit and web research.
 
 Record X sources separately where appropriate.
 
-Phase 3 — Candidate Selection
+Phase 3 â€” Candidate Selection
 
 After Reddit and X discovery:
 
@@ -235,7 +235,7 @@ Do not spend the entire research budget collecting candidates.
 
 The goal is to leave enough searches for verification.
 
-Phase 4 — Verification
+Phase 4 â€” Verification
 
 Verification is mandatory for significant findings.
 
@@ -316,7 +316,7 @@ unverifiedFindings
 A successful publication should normally contain:
 
 at least 5 adequately verified or partially verified findings
-preferably 8–12 useful findings
+preferably 8â€“12 useful findings
 clear distinction between verified information and community signals
 current/relevant evidence
 no fabricated dates
@@ -338,32 +338,32 @@ During execution provide concise progress updates.
 Use this style:
 
 [Reddit Tech Radar]
-→ Starting discovery
-→ Searching Reddit
-→ Searching X / Twitter
-→ Reviewing candidate signals
-→ Removing duplicates and old material
-→ Starting verification
-→ Verifying current findings
-→ Building report
-→ Running quality gate
-→ Publishing report
-→ Updating archive
-→ Git commit/push
-✓ Complete
+â†’ Starting discovery
+â†’ Searching Reddit
+â†’ Searching X / Twitter
+â†’ Reviewing candidate signals
+â†’ Removing duplicates and old material
+â†’ Starting verification
+â†’ Verifying current findings
+â†’ Building report
+â†’ Running quality gate
+â†’ Publishing report
+â†’ Updating archive
+â†’ Git commit/push
+âœ“ Complete
 
 More detailed progress is acceptable when useful, for example:
 
-→ Reddit discovery: 6 candidates
-→ X discovery: 3 candidates
-→ Verification: 5 confirmed
+â†’ Reddit discovery: 6 candidates
+â†’ X discovery: 3 candidates
+â†’ Verification: 5 confirmed
 
 Do not falsely report a stage as complete.
 
 If a search fails:
 
-⚠ Search failed: <reason>
-→ Continuing with remaining research budget
+âš  Search failed: <reason>
+â†’ Continuing with remaining research budget
 
 Do not stop the entire run merely because an optional source is unavailable.
 
@@ -569,45 +569,76 @@ and include the exact failed stage and evidence.
 
 Publishing Safety
 
-Never destroy a valid published report because today's research failed.
+Research and publication are separate stages.
 
-Before publishing:
+Hermes is responsible for:
 
-Validate the JSON.
-Run the quality gate.
-Confirm the report date.
-Confirm source links.
-Confirm verification information.
-Confirm the report is not mostly old material.
-Only then replace latest.json.
-Create the dated archive.
-Review the Git diff.
+- Reddit/X/web discovery
+- source verification
+- report generation
+- JSON validation
+- the research quality gate
 
-If validation or quality checks fail:
+Hermes MUST NOT manually create the dated archive.
+Hermes MUST NOT manually perform the publication Git workflow.
 
-Preserve the existing published latest.json.
+After the research quality gate passes:
 
-Do not publish a bad report merely because the scheduled run occurred.
+1. Write the complete validated report to:
+   data/reddit-tech-radar/latest.json
 
-Git Workflow
+2. Do NOT create or modify the dated archive manually.
 
-After a successful report:
+3. Run the permanent repository publisher:
 
-Check git status.
-Review the changed JSON.
-Validate that no secrets were added.
-Add the report/archive changes.
-Commit with:
+   powershell -ExecutionPolicy Bypass -File .\scripts\publish-reddit-tech-radar.ps1
 
-Update Reddit Tech Radar - YYYY-MM-DD
+4. The publisher is solely responsible for:
+   - validating latest.json
+   - validating the publication date
+   - creating the dated archive as an exact byte-for-byte copy of latest.json
+   - validating both files
+   - comparing their SHA-256 hashes
+   - checking for unexpected Git changes
+   - staging ONLY latest.json and the dated archive
+   - committing with:
+     Update Reddit Tech Radar - YYYY-MM-DD
+   - pushing to the configured GitHub remote
+   - verifying that local HEAD matches origin
+   - verifying that the working tree is clean
 
-Push to the configured GitHub remote.
+5. Hermes MUST NOT perform any of those publication operations itself.
 
-Never force push.
+The publisher is a permanent, version-controlled repository component explicitly required by this skill. It is not a temporary helper script and MUST NOT be regenerated during a scheduled run.
 
-If GitHub push fails, do not claim publication succeeded.
+If the publisher exits unsuccessfully:
 
-Report the failure clearly.
+RESEARCH COMPLETE
+PUBLICATION FAILED
+
+Report the exact publisher stage and evidence returned by the publisher.
+
+Never claim publication success merely because latest.json was written.
+
+Failure Behaviour
+
+If research fails:
+
+- do not fabricate results
+- do not overwrite valid latest.json
+- preserve the previous report
+- explain the failure
+- leave enough information for the next run to recover
+
+If verification is insufficient:
+
+[Reddit Tech Radar]
+ Research completed but quality gate failed
+ Existing latest.json preserved
+- Verified findings: X
+- Partially verified findings: Y
+- Community-only findings: Z
+- Reason: insufficient current verification
 
 Scheduled Execution
 
@@ -615,56 +646,33 @@ The skill must work unattended from Hermes cron.
 
 It must never depend on:
 
-interactive Reddit login
-agent-reach
-manual approval
-user prompts
-secrets stored in the repository
+- interactive Reddit login
+- agent-reach
+- manual approval
+- user prompts
+- secrets stored in the repository
 
 If Reddit or X/Twitter access is unavailable, continue using the other available discovery and verification sources.
 
 The scheduled workflow must remain within the 12-search maximum.
 
-Failure Behaviour
-
-If research fails:
-
-do not fabricate results
-do not overwrite valid latest.json
-preserve the previous report
-explain the failure
-leave enough information for the next run to recover
-
-If verification is insufficient:
-
-[Reddit Tech Radar]
-⚠ Research completed but quality gate failed
-✓ Existing latest.json preserved
-- Verified findings: X
-- Partially verified findings: Y
-- Community-only findings: Z
-- Reason: insufficient current verification
 Successful Completion
 
-A successful run should finish with something similar to:
+A successful run should finish with:
 
 [Reddit Tech Radar]
-✓ Research complete
-✓ 10 findings
-✓ 6 verified
-✓ 3 partially verified
-✓ 1 community signal
-✓ Quality gate passed
-✓ latest.json updated
-✓ Archive created
-✓ GitHub push successful
+ Research complete
+ Quality gate passed
+ latest.json updated
+ Permanent publisher completed
+ Archive matches latest.json
+ GitHub push successful
 
 If X/Twitter was unavailable:
 
-ℹ X/Twitter unavailable — Reddit and web verification used instead
+ℹ X/Twitter unavailable  Reddit and web verification used instead
 
 Do not treat optional source failure as total research failure.
-
 Core Principle
 
 The radar should answer:
