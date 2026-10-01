@@ -21,7 +21,7 @@ if (!(Test-Path $latest)) {
 }
 
 if (!(Test-Path $archiveDir)) {
-    New-Item -ItemType Directory -Path $archiveDir | Out-Null
+    Fail "Locate archive directory" "Directory does not exist: $archiveDir"
 }
 
 # ------------------------------------------------------------
