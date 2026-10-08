@@ -707,11 +707,9 @@
   <header>
     <h1>Reddit Tech Radar</h1>
     <p>Daily technology intelligence from Reddit discussions</p>
-    <div class="meta-bar" id="meta-bar">
-      <span id="research-date"><span>📅</span>Research date: —</span>
-      <span id="last-updated"><span>🔄</span>Last updated: —</span>
-      <span id="version"><span>🏷️</span>Version: —</span>
-    </div>
+    <span id="research-date"><span>📅</span>Publication date: —</span>
+          <span id="last-updated"><span>🔄</span>Last updated: —</span>
+          <span id="version"><span>🏷️</span>Version: —</span>
   </header>
 
   <main>
@@ -897,12 +895,12 @@
       container.innerHTML = items.map(item => `
         <div class="card fade-in-up">
           <div class="card-header">
-            <h3 class="card-title">${escapeHtml(item.vulnerability)}</h3>
-            <span class="category-tag">${escapeHtml(item.product)}</span>
+            <h3 class="card-title">${escapeHtml(item.topic)}</h3>
+            <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
           </div>
-          <p><strong>CVE:</strong> <code>${escapeHtml(item.cve)}</code></p>
-          <p><strong>CISA KEV:</strong> ${escapeHtml(item.cisaKev)}</p>
-          <p><strong>Status:</strong> ${escapeHtml(item.status)}</p>
+          <p>${escapeHtml(item.summary)}</p>
+          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
         </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
@@ -914,10 +912,12 @@
       container.innerHTML = items.map(item => `
         <div class="card fade-in-up">
           <div class="card-header">
-            <h3 class="card-title">${escapeHtml(item.announcement)}</h3>
-            <span class="category-tag">${escapeHtml(item.type)}</span>
+            <h3 class="card-title">${escapeHtml(item.topic)}</h3>
+            <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
           </div>
-          <p><strong>Date:</strong> ${escapeHtml(item.date)}</p>
+          <p>${escapeHtml(item.summary)}</p>
+          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
         </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
@@ -943,8 +943,10 @@
       if (!items.length) return;
       container.innerHTML = items.map(item => `
         <div class="career-signal fade-in-up">
-          <span>${escapeHtml(item)}</span>
-          <time>${new Date().toLocaleDateString()}</time>
+          <strong>${escapeHtml(item.signal)}</strong>
+          <p>${escapeHtml(item.summary)}</p>
+          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
         </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
@@ -956,11 +958,11 @@
       container.innerHTML = items.map(item => `
         <div class="watch-item fade-in-up">
           <div class="watch-content">
-            <div class="watch-title">${escapeHtml(item.topic)}</div>
+            <div class="watch-title">${escapeHtml(item.whatHappened)}</div>
             <div class="watch-meta">
-              <div><strong>Why:</strong> ${escapeHtml(item.why)}</div>
-              <div><strong>Evidence:</strong> ${escapeHtml(item.evidence)}</div>
-              <div><strong>Check tomorrow:</strong> ${escapeHtml(item.checkTomorrow)}</div>
+              <div><strong>Why:</strong> ${escapeHtml(item.whyItMightDevelop)}</div>
+              <div><strong>Evidence:</strong> ${escapeHtml(item.whatEvidenceCurrentlyExists)}</div>
+              <div><strong>Check tomorrow:</strong> ${escapeHtml(item.whatShouldBeCheckedTomorrow)}</div>
             </div>
           </div>
         </div>
