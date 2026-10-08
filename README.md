@@ -695,3 +695,74 @@ Daily
 License
 
 MIT
+
+## Recent Rendering Issue — October 2026
+
+During testing of the daily Reddit Tech Radar report, some sections initially appeared blank or malformed.
+
+### Blank sections are not necessarily errors
+
+The report intentionally allows some watch sections to contain no findings.
+
+For example, AI Watch may be empty when the research run does not identify an AI discussion that meets the report's inclusion/verification criteria.
+
+An empty optional section should therefore not automatically trigger regeneration of the research report or replacement of valid latest.json data.
+
+The distinction is:
+
+* Empty because no qualifying finding was identified — valid report outcome.
+* Empty/malformed because the frontend is reading the wrong schema or an outdated deployed frontend — rendering/deployment issue.
+
+### What happened
+
+The AWS / Cloud Watch section was observed displaying malformed output such as:
+
+```
+###
+**Date:**
+```
+
+The underlying `latest.json` contained valid AWS Cloud Watch objects using the current schema:
+
+* topic
+* summary
+* verificationStatus
+* confidence
+
+Investigation confirmed that the current `renderAwsWatch()` function in `index.html` already uses these correct fields.
+
+The same schema alignment was also confirmed for the other affected renderer sections.
+
+### Root cause
+
+The problem was caused by a stale cached copy of `index.html` being served by the CDN after the renderer fix had already been deployed.
+
+The current renderer was correct, and the current `latest.json` was correct. The browser/CDN was temporarily serving an older frontend version that still contained the previous field expectations.
+
+Cache-busting the GitHub Pages URL confirmed that the corrected renderer was being served and that the AWS / Cloud Watch content rendered correctly.
+
+### Resolution
+
+No research data was regenerated and no changes were required to the AWS research objects.
+
+The resolution was to allow the CDN cache to expire / refresh and verify the deployed frontend using a cache-busted URL.
+
+The renderer fix was committed as:
+
+`dd11b42` Fix Reddit Tech Radar renderer to match current JSON schema
+
+### Lessons learned
+
+When a section appears blank or malformed:
+
+1. Check `latest.json` first.
+2. Confirm that the expected data actually exists.
+3. Compare the JSON schema with the frontend renderer.
+4. Check the deployed `index.html`, not only the local copy.
+5. Test with a cache-busting query parameter if the deployed page appears inconsistent with the current repository.
+6. Do not regenerate valid research simply because the presentation layer appears stale.
+7. Only treat an empty optional section as an error if qualifying data should have been present.
+
+### Future improvements
+
+Future deployment improvements may include reducing stale HTML caching so that frontend changes become visible more quickly.
