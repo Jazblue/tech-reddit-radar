@@ -8,6 +8,10 @@ Daily technology intelligence from Reddit discussions
 
 Data source: GitHub Repository | Updated daily via Hermes Agent
 
+## Recent Improvements
+
+- Added retry logic to the Git push step in the Reddit Tech Radar cron job to handle transient network timeouts, improving reliability of daily updates.
+
 ## Trending Topics (Attempted Collection)
 
 **Status**: Data collection blocked by Reddit's anti-bot measures.
