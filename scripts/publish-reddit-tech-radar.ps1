@@ -218,14 +218,23 @@ if ((($commitFiles | Sort-Object) -join "`n") -ne (($expected | Sort-Object) -jo
 # ------------------------------------------------------------
 # 11. Push
 # ------------------------------------------------------------
-
-git push origin master
-
-if ($LASTEXITCODE -ne 0) {
-    Fail "Git push" "git push returned exit code $LASTEXITCODE"
+# 11. Push with retry and timeout
+# ------------------------------------------------------------
+$maxAttempts = 3
+for ($i = 1; $i -le $maxAttempts; $i++) {
+    Write-Host "Git push attempt $i of $maxAttempts..."
+    $start = Get-Date
+    git push origin master
+    $exit = $LASTEXITCODE
+    $elapsed = (Get-Date) - $start
+    Write-Host "Push finished in $($elapsed.TotalSeconds)s with exit code $exit"
+    if ($exit -eq 0) { break }
+    if ($i -lt $maxAttempts) { Start-Sleep -Seconds 15 }
+}
+if ($exit -ne 0) {
+    Fail "Git push" "Failed after $maxAttempts attempts (last exit code $exit)"
 }
 
-# ------------------------------------------------------------
 # 12. Verify remote and clean working tree
 # ------------------------------------------------------------
 
