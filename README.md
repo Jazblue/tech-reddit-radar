@@ -419,6 +419,8 @@ Scheduled jobs are stateful
 
 A scheduled job needs to be checked after creation rather than assuming that a successful command means the job is permanently registered.
 
+- Added retry logic to the Git push step in the Reddit Tech Radar cron job to handle transient network timeouts, improving reliability of daily updates.
+
 The Hermes configuration was inspected directly and the persisted scheduler state was verified.
 
 Gateway state matters
