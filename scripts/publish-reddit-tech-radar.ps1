@@ -46,6 +46,32 @@ if ($report.publicationDate -ne $today) {
     Fail "Validate publication date" "publicationDate=$($report.publicationDate), expected=$today"
 }
 
+if ([string]::IsNullOrWhiteSpace([string]$report.researchDate)) {
+    Fail "Validate research date" "researchDate is missing"
+}
+
+try {
+    $researchDate = [DateTime]::ParseExact(
+        [string]$report.researchDate,
+        "yyyy-MM-dd",
+        [System.Globalization.CultureInfo]::InvariantCulture
+    ).Date
+}
+catch {
+    Fail "Validate research date" "Invalid researchDate: $($report.researchDate)"
+}
+
+$todayDate = [DateTime]::ParseExact(
+    $today,
+    "yyyy-MM-dd",
+    [System.Globalization.CultureInfo]::InvariantCulture
+).Date
+
+if ($researchDate -lt $todayDate.AddDays(-1)) {
+    Fail "Validate research freshness" "researchDate=$($report.researchDate) is more than one calendar day old; publication blocked"
+}
+
+
 if ([string]::IsNullOrWhiteSpace([string]$report.generatedTimestamp)) {
     Fail "Validate generated timestamp" "generatedTimestamp is missing"
 }
