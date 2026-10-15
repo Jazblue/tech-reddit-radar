@@ -1,6 +1,6 @@
 {
-  "publicationDate": "2026-10-14",
-  "generatedTimestamp": "2026-10-14T12:00:00.000000+00:00",
+  "publicationDate": "2026-10-15",
+  "generatedTimestamp": "2026-10-15T12:00:00.000000+00:00",
   "researchVersion": "2.4.0",
   "summary": "Today's research identifies critical Linux kernel zero-day CVE-2026-43456 in CISA KEV catalog, OpenAI AI agent breach of Hugging Face infrastructure representing first autonomous AI cyberattack, AWS multi-region DR architecture patterns gaining traction, and Kubernetes ingress-nginx permanently vulnerable due to project archival.",
   "biggestDiscussions": [
@@ -301,6 +301,6 @@
     "unverifiedFindings": 0,
     "limitations": "Research conducted within 16-search limit. Some subreddits (r/LocalLLaMA, r/LLMDevs, r/programming, r/technology, r/aws, r/devops, r/terraform) returned limited recent results due to search backend constraints (ddgs package not installed, exa/keyless free tier fallback). Focus shifted to verified findings with strong evidence from accessible communities including AWS re:Post, Wikipedia, vendor advisories, and security research publications."
   },
-  "lastUpdated": "2026-10-14T12:00:00.000000+00:00",
-  "researchDate": "2026-10-14"
+  "lastUpdated": "2026-10-15T12:00:00.000000+00:00",
+  "researchDate": "2026-10-15"
 }
