@@ -1,5 +1,5 @@
 {
-  "publicationDate": "2026-10-16",
+  "publicationDate": "2026-10-19",
   "generatedTimestamp": "2026-10-16T11:38:34.000000+00:00",
   "researchVersion": "2.5.0",
   "summary": "Today's research identifies AWS Bedrock Managed Agents powered by OpenAI entering public preview with IAM roles and CloudTrail audit, critical Cloud Foundry UAA CVE-2026-40965 exposing EC private keys via /token_keys endpoint, Kubernetes v1.37 introducing CompositePodGroup API for hierarchical gang scheduling, and Google Cloud Application Integration CVE-2026-19759 allowing authenticated users to execute internal RPCs under privileged identity.",
@@ -323,5 +323,5 @@
     "limitations": "Research conducted within 16-search limit. Reddit search backend (ddgs) not installed, limiting direct subreddit discovery. Focus shifted to authoritative primary sources: AWS documentation, NVD, Kubernetes documentation, vendor security advisories. Cross-community trends identified from overlapping coverage in official blogs and community discussions."
   },
   "lastUpdated": "2026-10-16T11:38:34.000000+00:00",
-  "researchDate": "2026-10-16"
+  "researchDate": "2026-10-19"
 }
