@@ -1,6 +1,6 @@
 {
-  "publicationDate": "2026-10-28",
-  "generatedTimestamp": "2026-10-28T13:25:18.470106Z",
+  "publicationDate": "2026-10-29",
+  "generatedTimestamp": "2026-10-29T14:05:43.393379Z",
   "researchVersion": "2.3.0",
   "summary": "Today's radar covers a mix of active supply-chain threats, AWS cost-control updates, and continued evolution of agentic coding. The DirtyBlanket npm worm (MAL-2026-17243) remains a live concern with verified OSV/CISA-level documentation. AWS announced practical updates including Lambda EventBridge loop protection and DynamoDB global-table unlinking. Community discussion continues around the maturity of AI coding agents, local model releases (Qwen3.8-27B), and the growing gap between AI capability and organizational cost-governance readiness.",
   "biggestDiscussions": [
@@ -82,7 +82,7 @@
     {
       "title": "Qwen3.8-27B open-weight release and DiffusionGemma edge inference on a pregnancy test",
       "category": "AI / Local LLM",
-      "shortSummary": "Alibaba's Qwen team released Qwen3.8-27B, an open-weight model drawing strong community interest on r/LocalLLaMA for RTX 3090 feasibility and data-sovereignty use cases. Separately, a community member reported running DiffusionGemma at 1,500 tokens/sec on a digital pregnancy test \u2014 an extreme edge-inference demonstration.",
+      "shortSummary": "Alibaba's Qwen team released Qwen3.8-27B, an open-weight model drawing strong community interest on r/LocalLLaMA for RTX 3090 feasibility and data-sovereignty use cases. Separately, a community member reported running DiffusionGemma at 1,500 tokens/sec on a digital pregnancy test — an extreme edge-inference demonstration.",
       "whyItMatters": "The Qwen release extends the open-weight model ecosystem with a mid-tier size; the DiffusionGemma result illustrates the accelerating pace of edge AI optimization, even on unconventional hardware.",
       "redditSignal": "Recurring theme on r/LocalLLaMA; model release independently verifiable via HuggingFace.",
       "verificationStatus": "PARTIALLY VERIFIED",
@@ -389,6 +389,6 @@
     "unverifiedFindings": 0,
     "limitations": "Research based on 12 findings from the pre-completed research run. Some findings (Qwen3.8-27B, Karpathy statement, DiffusionGemma benchmark, 340% cost spike) rely on community discussion threads rather than direct vendor/government primary sources. No live web search was performed for this publication pass; the findings file contains the original research evidence."
   },
-  "lastUpdated": "2026-10-27T00:00:00Z",
-  "researchDate": "2026-10-28"
+  "lastUpdated": "2026-10-29T14:05:43.393379Z",
+  "researchDate": "2026-10-29"
 }
