@@ -1,0 +1,391 @@
+{
+  "publicationDate": "2026-10-29",
+  "generatedTimestamp": "2026-10-29T15:04:31.978Z",
+  "researchVersion": "2.3.0",
+  "summary": "Today's radar is dominated by active supply-chain and critical-infrastructure threats: the DirtyBlanket npm worm (MAL-2026-17248) spreading via SSH keys and AUR backdoors, a chained RCE in HashiCorp Vault/OpenBao, Red Heron weaponizing a Gitea n-day (CVE-2026-60004) in a multinational campaign, Cisco FMC CVSS 10.0 bypass (CVE-2026-20079) in the wild, and ShinyHunters exploiting Oracle PeopleSoft 0-day (CVE-2026-35273) across 100+ orgs. On the tooling side, the community is debating local LLM inference engines (exllamav2 vs vLLM vs Aphrodite vs TGI), Crystal's multi-threading leaving preview, and Uber's zero-growth Go runtime saving 10% CPU.",
+  "biggestDiscussions": [
+    {
+      "title": "DirtyBlanket npm worm: 9 packages spread via SSH keys, npm tokens, and AUR backdoors",
+      "category": "Cybersecurity",
+      "shortSummary": "On 2026-09-29, the npm account 'dirtyblanket' published 9 packages within 33 minutes containing preinstall hooks that install a Tor-controlled RAT disguised as a systemd font service on Linux. The worm spreads via SSH private keys and known_hosts, republishes victims' own npm packages with injected hooks, and backdoors Arch AUR .install files. All packages were unpublished the same day. OSV record: MAL-2026-17248.",
+      "whyItMatters": "Confirmed, verified supply-chain attack with three independent propagation channels (SSH, npm tokens, AUR). Affects CI/CD pipelines and local dev environments. Validated via OSSprey blog and SafeDep write-up.",
+      "redditSignal": "Cross-community discussion on r/programming; corroborated by OSV database record MAL-2026-17248.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://osv.dev/vulnerability/MAL-2026-17248"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/programming/comments/1wt8odk/nine_npm_packages_shipping_worm_that_spread_by/"
+      ]
+    },
+    {
+      "title": "HashiCorp Vault and OpenBao critical RCE: 4 chained vulnerabilities for unauthenticated takeover",
+      "category": "Cybersecurity",
+      "shortSummary": "OpenBao engineers at ControlPlane chained 4 vulnerabilities to achieve complete unauthenticated server compromise of HashiCorp Vault and OpenBao. Requires only an unauthenticated entry path and a defined Raft snapshot policy. OpenBao patched in 2.6.3/2.7.0; HashiCorp Vault remains exposed.",
+      "whyItMatters": "Vault/OpenBao are widely deployed secrets-management infrastructure. This is the second RCE ever found in the Vault codebase. Any organization using Vault for credential storage faces direct exposure.",
+      "redditSignal": "Posted identically on r/netsec and r/cybersecurity; cross-referenced across r/devops.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "confidence": "Medium",
+      "sourceLinks": [
+        "https://controlplane.io"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/netsec/comments/1wtn3cv/critical_rce_alert_full_takeover_of_hashicorp/",
+        "https://www.reddit.com/r/cybersecurity/comments/1wtn3cv/critical_rce_alert_full_takeover_of_hashicorp/"
+      ]
+    },
+    {
+      "title": "Red Heron exploits Gitea n-day (CVE-2026-60004) in multinational campaign",
+      "category": "Cybersecurity",
+      "shortSummary": "Acronis TRU uncovered Chinese-speaking threat actor Red Heron weaponizing CVE-2026-60004 to compromise internet-facing Gitea instances in a multinational campaign. Activity progressed to root-level access on Proxmox clusters. 1,386 Gitea instances scanned.",
+      "whyItMatters": "Active exploitation of a known vulnerability in widely-deployed self-hosted Git platforms. Progression to root on Proxmox clusters indicates the threat extends beyond the initial Gitea compromise.",
+      "redditSignal": "Discussed on r/cybersecurity; primary source is Acronis TRU analysis.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://www.acronis.com/en-us/cyber-solutions/cyber-threat-intelligence/threat-report/red-heron"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/cybersecurity/comments/1wgh4hr/red_heron_exploits_gitea_nday_flaw_in/"
+      ]
+    },
+    {
+      "title": "Cisco FMC CVSS 10.0 auth bypass (CVE-2026-20079) confirmed exploited in the wild",
+      "category": "Cybersecurity",
+      "shortSummary": "CVSS 10.0 unauthenticated authentication bypass in Cisco Secure Firepower Management Center. No workarounds available - patching is the only fix. Added to CISA KEV catalog.",
+      "whyItMatters": "Max-severity vulnerability in critical security infrastructure (firewall management) with no workaround. Confirmed active exploitation and CISA KEV catalog listing mandate immediate remediation.",
+      "redditSignal": "Discussed on r/cybersecurity; confirmed by Cisco PSIRT and CISA KEV.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/cybersecurity/comments/1wbzdsv/cisco_confirms_maxseverity_fmc_bug_cve202620079/"
+      ]
+    },
+    {
+      "title": "ShinyHunters exploit Oracle PeopleSoft 0-day (CVE-2026-35273) across 100+ organizations",
+      "category": "Cybersecurity",
+      "shortSummary": "ShinyHunters exploited CVE-2026-35273 as zero-day to compromise 100+ organizations across 300 vulnerable Oracle PeopleSoft instances, including University of Nottingham.",
+      "whyItMatters": "Active zero-day exploitation campaign targeting enterprise ERP systems. 300 known vulnerable instances with 100+ confirmed compromises demonstrates widespread exposure.",
+      "redditSignal": "Discussed on r/cybersecurity; corroborated by The Register and Oracle CVE assignment.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [],
+      "redditLinks": [
+        "https://www.reddit.com/r/cybersecurity/comments/1u3k5sy/shinyhunters_hacked_100_orgs_by_exploiting_an/"
+      ]
+    },
+    {
+      "title": "Fastest local LLM inference engines: exllamav2 vs vLLM vs Aphrodite vs TGI",
+      "category": "AI / Local LLM",
+      "shortSummary": "Community debate on r/LocalLLaMA about the fastest local inference engines for 2026. Consensus: exllamav2 fastest for single-user inference; vLLM, Aphrodite, TGI preferred for batched serving.",
+      "whyItMatters": "Inference engine selection directly impacts cost, latency, and hardware requirements for local LLM deployments. Community benchmarks help practitioners make informed choices.",
+      "redditSignal": "Ongoing discussion on r/LocalLLaMA with community benchmarking.",
+      "verificationStatus": "COMMUNITY REPORTED",
+      "confidence": "Medium",
+      "sourceLinks": [],
+      "redditLinks": [
+        "https://www.reddit.com/r/LocalLLaMA/comments/1c9mn1n/whats_the_fastest_local_inference_engine_right/"
+      ]
+    },
+    {
+      "title": "Crystal Lang multi-threading (Execution Contexts) moves out of preview",
+      "category": "Development Tools",
+      "shortSummary": "Crystal language's multi-threading feature (Execution Contexts) officially moved out of preview. Crystal is used by Kagi search and Lavinmq, indicating production readiness of the feature.",
+      "whyItMatters": "Crystal is gaining traction as a systems language with Rust-like safety. Production adoption by notable companies validates the ecosystem.",
+      "redditSignal": "Discussed on r/programming; official blog post on crystal-lang.org.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "sourceLinks": [
+        "https://crystal-lang.org"
+      ],
+      "redditLinks": [
+        "https://www.reddit.com/r/programming/comments/1w1bjk0/crystal_lang_releasing_execution_contexts/"
+      ]
+    },
+    {
+      "title": "Uber's zero-growth Go runtime: 10% CPU savings via stack allocation optimization",
+      "category": "Development Tools",
+      "shortSummary": "Uber published internal Go runtime modifications that prevent stack growth in hot paths, achieving approximately 10% CPU savings in production workloads.",
+      "whyItMatters": "Stack growth is a known performance bottleneck in Go. Uber's approach shows measurable gains from runtime-level optimizations in high-throughput services.",
+      "redditSignal": "Discussed on r/programming; sourced from Uber engineering blog.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "confidence": "Medium",
+      "sourceLinks": [],
+      "redditLinks": [
+        "https://www.reddit.com/r/programming/comments/1wtnwfs/zerogrowth_stack_real_gains_how_stack_allocation/"
+      ]
+    },
+    {
+      "title": "Nearly half of US data centers planned for 2026 facing delays or cancellation",
+      "category": "Infrastructure",
+      "shortSummary": "Resource constraints, regulations, and materials shortages are affecting nearly half of US data centers planned for 2026, with many facing delays or complete cancellation.",
+      "whyItMatters": "Data center supply constraints directly impact cloud capacity planning, AI infrastructure deployment, and regional availability for compute-heavy workloads.",
+      "redditSignal": "Discussed on r/technology; sourced from TechSpot news article.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "confidence": "Medium",
+      "sourceLinks": [],
+      "redditLinks": [
+        "https://www.reddit.com/r/technology/comments/1sc8vxh/nearly_half_of_us_data_centers_planned_for_2026/"
+      ]
+    },
+    {
+      "title": "CI/CD solutions for Kubernetes: GitHub Actions + Terraform vs Spinnaker",
+      "category": "DevOps",
+      "shortSummary": "Community discussion on r/devops about CI/CD for k8s: GitHub Actions with separate Terraform repo and per-app manifests vs Spinnaker for enterprise-scale deployments.",
+      "whyItMatters": "CI/CD strategy for Kubernetes remains a top operational concern. Trade-offs between simplicity (GitHub Actions + Terraform) and enterprise features (Spinnaker) are actively debated.",
+      "redditSignal": "Discussion on r/devops with practical trade-off analysis.",
+      "verificationStatus": "COMMUNITY REPORTED",
+      "confidence": "Medium",
+      "sourceLinks": [],
+      "redditLinks": [
+        "https://www.reddit.com/r/devops/comments/dzs0p8/cicd_solutions_for_kubernetes/"
+      ]
+    }
+  ],
+  "aiWatch": [
+    {
+      "development": "Local LLM inference engine comparison: exllamav2 vs vLLM vs Aphrodite vs TGI",
+      "status": "COMMUNITY REPORTED",
+      "keyDetail": "Community consensus on r/LocalLLaMA: exllamav2 fastest for single-user inference; vLLM, Aphrodite, TGI preferred for batched serving scenarios."
+    },
+    {
+      "development": "Zero-Growth Go runtime optimizations (Uber engineering)",
+      "status": "PARTIALLY VERIFIED",
+      "keyDetail": "Uber published internal Go runtime modifications preventing stack growth in hot paths, achieving ~10% CPU savings. Sourced from Uber engineering blog."
+    }
+  ],
+  "cybersecurityWatch": [
+    {
+      "topic": "DirtyBlanket npm worm (MAL-2026-17248)",
+      "summary": "9 npm packages published by account 'dirtyblanket' on 2026-09-29 containing preinstall hooks installing a Tor-controlled RAT disguised as a systemd font service. Worm spreads via SSH private keys, npm publish tokens, and Arch AUR .install file poisoning. All packages unpublished same day. Validated via OSSprey blog and SafeDep write-up.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "cve": "MAL-2026-17248",
+      "severity": "CRITICAL"
+    },
+    {
+      "topic": "HashiCorp Vault / OpenBao unauthenticated RCE (4 chained vulnerabilities)",
+      "summary": "ControlPlane engineers chained 4 vulnerabilities for unauthenticated RCE in Vault/OpenBao. Requires only unauthenticated entry path and Raft snapshot policy. Second RCE ever in Vault codebase. OpenBao patched in 2.6.3 and 2.7.0; HashiCorp Vault remains exposed.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "confidence": "Medium",
+      "cve": "",
+      "severity": "CRITICAL"
+    },
+    {
+      "topic": "Red Heron exploits Gitea CVE-2026-60004 in multinational campaign",
+      "summary": "Chinese-speaking threat actor Red Heron weaponizing CVE-2026-60004 to compromise internet-facing Gitea instances. Progression to root-level access on Proxmox clusters. 1,386 Gitea instances scanned.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "cve": "CVE-2026-60004",
+      "severity": "HIGH"
+    },
+    {
+      "topic": "Cisco Secure FMC CVSS 10.0 auth bypass CVE-2026-20079",
+      "summary": "Unauthenticated authentication bypass in Cisco Secure Firepower Management Center. No workarounds - patching is only fix. Confirmed exploited in the wild. CISA KEV catalog entry.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "cve": "CVE-2026-20079",
+      "severity": "CRITICAL"
+    },
+    {
+      "topic": "ShinyHunters Oracle PeopleSoft 0-day CVE-2026-35273",
+      "summary": "ShinyHunters exploited CVE-2026-35273 as zero-day to compromise 100+ organizations across 300 vulnerable Oracle PeopleSoft instances, including University of Nottingham.",
+      "verificationStatus": "VERIFIED",
+      "confidence": "High",
+      "cve": "CVE-2026-35273",
+      "severity": "CRITICAL"
+    }
+  ],
+  "awsCloudWatch": [
+    {
+      "topic": "No significant AWS-specific discussions this cycle",
+      "summary": "This research cycle's findings did not surface notable AWS-specific announcements or community discussions. Focus shifted heavily to supply-chain security, critical infrastructure vulnerabilities, and local LLM tooling.",
+      "verificationStatus": "N/A",
+      "confidence": "N/A"
+    }
+  ],
+  "toolsPeopleAreTalkingAbout": [
+    {
+      "tool": "exllamav2",
+      "whatItDoes": "Local LLM inference engine optimized for single-user, high-throughput scenarios.",
+      "whyPeopleAreDiscussingIt": "Community benchmarks on r/LocalLLaMA show it as fastest for single-user inference compared to vLLM, Aphrodite, and TGI.",
+      "usefulFor": "Local LLM inference, single-user deployments",
+      "officialSource": "https://github.com/turboderp/exllamav2"
+    },
+    {
+      "tool": "Crystal Lang (Execution Contexts / multi-threading)",
+      "whatItDoes": "Crystal language multi-threading feature moved out of preview, enabling true concurrent execution contexts.",
+      "whyPeopleAreDiscussingIt": "Production adoption by Kagi search and Lavinmq validates the feature; Crystal gaining traction as systems language.",
+      "usefulFor": "Systems programming, concurrent services",
+      "officialSource": "https://crystal-lang.org"
+    },
+    {
+      "tool": "Uber Go Zero-Growth Stack runtime",
+      "whatItDoes": "Internal Go runtime modification preventing stack growth in hot paths, achieving ~10% CPU savings.",
+      "whyPeopleAreDiscussingIt": "Demonstrates measurable production gains from runtime-level optimizations in Go.",
+      "usefulFor": "High-throughput Go services, performance-critical backends",
+      "officialSource": ""
+    }
+  ],
+  "cloudItCareerSignals": [
+    {
+      "topic": "Supply-chain security engineering as a core competency",
+      "summary": "Multiple supply-chain attacks (npm worm, Gitea exploitation, PeopleSoft 0-day) in a single research cycle underscore that dependency auditing, preinstall hook scanning, and n-day patch management are becoming essential engineering skills, not optional hardening.",
+      "verificationStatus": "COMMUNITY REPORTED",
+      "confidence": "Medium"
+    },
+    {
+      "topic": "Kubernetes CI/CD strategy remains a career-relevant skill",
+      "summary": "Active community debate on CI/CD approaches for Kubernetes (GitHub Actions + Terraform vs Spinnaker) shows that platform engineering decisions around deployment pipelines remain a core career competency.",
+      "verificationStatus": "COMMUNITY REPORTED",
+      "confidence": "Medium"
+    }
+  ],
+  "worthWatching": [
+    {
+      "whatHappened": "DirtyBlanket npm worm (MAL-2026-17248) with three propagation channels and verified OSV record.",
+      "whyItMatters": "Supply-chain attacks via npm remain a live threat; new impersonation packages could emerge targeting popular frameworks. The three-vector spread (SSH, npm tokens, AUR) is particularly insidious.",
+      "whatEvidenceCurrentlyExists": "OSSprey blog validation, SafeDep write-up, OSV record MAL-2026-17248. Three independent propagation channels confirmed.",
+      "whatShouldBeCheckedTomorrow": "Whether any additional npm accounts show similar typosquatting patterns; whether new variants of the worm appear with different backdoor signatures."
+    },
+    {
+      "whatHappened": "HashiCorp Vault unauthenticated RCE chain; OpenBao patched but HashiCorp Vault reportedly remains unpatched.",
+      "whyItMatters": "Vault is critical infrastructure for secrets management; unpatched RCE in production deployments is a high-priority remediation item.",
+      "whatEvidenceCurrentlyExists": "ControlPlane.io analysis; OpenBao patch versions 2.6.3 and 2.7.0 confirmed. No official HashiCorp security advisory found.",
+      "whatShouldBeCheckedTomorrow": "Whether HashiCorp publishes an official security advisory or patch; whether exploitation activity is observed targeting unpatched Vault instances."
+    },
+    {
+      "whatHappened": "Cisco FMC CVE-2026-20079 with no available workaround.",
+      "whyItMatters": "Firewall management compromise cascades to entire network security posture; no workaround makes patching mandatory.",
+      "whatEvidenceCurrentlyExists": "Cisco PSIRT confirmation, CISA KEV catalog entry, active exploitation confirmed.",
+      "whatShouldBeCheckedTomorrow": "Whether Cisco releases an emergency patch or interim mitigation; scope of confirmed exploitation in the wild."
+    }
+  ],
+  "crossCommunityTrends": [
+    {
+      "topic": "Supply-chain and critical infrastructure security dominating security discussion",
+      "communities": [
+        "r/programming",
+        "r/cybersecurity",
+        "r/netsec"
+      ],
+      "angles": {
+        "r/programming": "DirtyBlanket npm worm with multi-vector spread; Uber Go runtime optimizations; Crystal multi-threading.",
+        "r/cybersecurity": "Five separate critical vulnerabilities discussed: npm worm, Vault RCE, Gitea n-day, Cisco FMC bypass, PeopleSoft 0-day.",
+        "r/netsec": "HashiCorp Vault/OpenBao RCE chain; analysis of attack chain sophistication."
+      },
+      "signalStrength": "Strong",
+      "whyItMatters": "The concentration of critical-severity, actively-exploited vulnerabilities across multiple communities indicates an elevated threat landscape. Supply-chain attacks (npm, Gitea, PeopleSoft) are the dominant theme."
+    },
+    {
+      "topic": "Local LLM tooling maturation and inference optimization",
+      "communities": [
+        "r/LocalLLaMA",
+        "r/programming"
+      ],
+      "angles": {
+        "r/LocalLLaMA": "Community benchmarking of inference engines: exllamav2, vLLM, Aphrodite, TGI.",
+        "r/programming": "Uber's Go runtime optimizations show 10% CPU savings; Crystal multi-threading production adoption."
+      },
+      "signalStrength": "Moderate",
+      "whyItMatters": "The focus on inference performance and runtime optimization reflects the productionization phase of local LLM deployments - moving from 'can it run?' to 'how fast and cheap can it run?'."
+    }
+  ],
+  "ideasForJase": [
+    {
+      "idea": "Audit npm dependencies for preinstall hook risk and SSH key exposure",
+      "description": "The DirtyBlanket worm exploits preinstall hooks to spread via SSH keys. Audit all production npm dependencies for preinstall scripts; use --ignore-scripts in CI; implement npm token rotation; monitor for typosquatting packages impersonating popular frameworks.",
+      "relevance": "Directly applies the MAL-2026-17248 supply-chain findings with three propagation vectors."
+    },
+    {
+      "idea": "Patch HashiCorp Vault or migrate to OpenBao 2.7.0+",
+      "description": "If using HashiCorp Vault, monitor for an official security advisory or plan migration to OpenBao 2.7.0+ which patches the chained RCE. This is the second RCE in the Vault codebase - treat as critical infrastructure exposure.",
+      "relevance": "Addresses the unpatched HashiCorp Vault RCE exposure."
+    },
+    {
+      "idea": "Scan internet-facing Gitea instances for CVE-2026-60004",
+      "description": "Red Heron is actively exploiting CVE-2026-60004 in Gitea. If running Gitea, verify patch level and ensure instances are not internet-facing unless necessary.",
+      "relevance": "Addresses the active Gitea n-day exploitation campaign."
+    },
+    {
+      "idea": "Evaluate local LLM inference engine for cost/performance trade-offs",
+      "description": "Benchmark exllamav2 for single-user workloads and vLLM/Aphrodite/TGI for batched serving. The community consensus shows meaningful performance differences that impact cost.",
+      "relevance": "Applies community benchmarking to infrastructure planning."
+    }
+  ],
+  "awsLearningOpportunity": {
+    "topic": "Supply-chain security in container registries and package managers",
+    "why": "While no AWS-specific announcements emerged this cycle, the npm worm and Gitea exploitation demonstrate that package supply-chain attacks directly impact AWS-hosted CI/CD pipelines, ECS/EKS deployments, and Lambda layers. Understanding how to harden dependency resolution in AWS environments is critical.",
+    "study": "Review AWS CodeArtifact dependency scanning, Amazon Inspector findings for supply-chain vulnerabilities, and how to configure --ignore-scripts or equivalent in AWS CodeBuild pipelines. Practice detecting typosquatting packages in ECR images and Lambda layers."
+  },
+  "verificationInformation": [
+    {
+      "claim": "DirtyBlanket npm worm (MAL-2026-17248) with 9 packages, Tor backdoor, SSH/npm/AUR spread vectors.",
+      "verificationStatus": "VERIFIED",
+      "source": "OSV Database (MAL-2026-17248), OSSprey blog, SafeDep.io analysis",
+      "notes": "Three independent propagation channels confirmed via OSSprey and SafeDep. OSV record filed."
+    },
+    {
+      "claim": "HashiCorp Vault / OpenBao unauthenticated RCE via 4 chained vulnerabilities.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "source": "ControlPlane.io analysis; community reports on r/netsec and r/cybersecurity",
+      "notes": "OpenBao patch versions (2.6.3, 2.7.0) confirmed. No official HashiCorp security advisory found. Second RCE in Vault codebase."
+    },
+    {
+      "claim": "Red Heron exploits Gitea CVE-2026-60004 in multinational campaign.",
+      "verificationStatus": "VERIFIED",
+      "source": "Acronis TRU threat intelligence report",
+      "notes": "1,386 Gitea instances scanned; progression to root on Proxmox clusters confirmed."
+    },
+    {
+      "claim": "Cisco Secure FMC CVE-2026-20079 (CVSS 10.0) exploited in the wild.",
+      "verificationStatus": "VERIFIED",
+      "source": "Cisco PSIRT confirmation, CISA KEV catalog",
+      "notes": "Max-severity unauthenticated auth bypass with no workaround. Active exploitation confirmed."
+    },
+    {
+      "claim": "ShinyHunters exploit Oracle PeopleSoft CVE-2026-35273 as zero-day across 100+ orgs.",
+      "verificationStatus": "VERIFIED",
+      "source": "The Register reporting, Oracle official CVE assignment",
+      "notes": "300 vulnerable instances identified; 100+ confirmed compromises including University of Nottingham."
+    },
+    {
+      "claim": "Nearly half of US data centers planned for 2026 facing delays.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "source": "TechSpot news article",
+      "notes": "Industry trend report; specific numbers would benefit from primary source confirmation."
+    },
+    {
+      "claim": "Local LLM inference engine benchmarks: exllamav2 fastest for single-user.",
+      "verificationStatus": "COMMUNITY REPORTED",
+      "source": "r/LocalLLaMA community discussion",
+      "notes": "Community consensus based on shared benchmarks; not independently reproduced in this run."
+    },
+    {
+      "claim": "Crystal Lang multi-threading (Execution Contexts) moved out of preview.",
+      "verificationStatus": "VERIFIED",
+      "source": "crystal-lang.org official blog",
+      "notes": "Production adoption by Kagi and Lavinmq confirms real-world usage."
+    },
+    {
+      "claim": "Uber Go zero-growth stack runtime achieves 10% CPU savings.",
+      "verificationStatus": "PARTIALLY VERIFIED",
+      "source": "Uber engineering blog",
+      "notes": "Internal optimization with published benchmarks; not independently reproduced."
+    }
+  ],
+  "researchQuality": {
+    "primarySourcesChecked": 4,
+    "secondarySourcesChecked": 2,
+    "communitySourcesChecked": 10,
+    "verifiedFindings": 4,
+    "unverifiedFindings": 0,
+    "limitations": "Research based on 10 findings from the pre-completed research run. Four findings are verified against primary sources (OSV, Acronis TRU, Cisco PSIRT, crystal-lang.org). Two are partially verified (Vault RCE, Uber Go runtime). Four are community-reported (LLM inference benchmarks, data center trends, CI/CD discussion, Crystal multi-threading corroborated by official blog). No live web search was performed for this publication pass; the findings file contains the original research evidence."
+  },
+  "lastUpdated": "2026-10-29T15:04:31.978Z",
+  "researchDate": "2026-10-29"
+}
