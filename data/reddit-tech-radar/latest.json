@@ -6,13 +6,13 @@
   "biggestDiscussions": [
     {
       "topic": "OpenBao and HashiCorp Vault: Four-Chained RCE from Unauthenticated Access",
-      "context": "ControlPlane published a full exploit chain chaining four vulnerabilities in OpenBao (and HashiCorp Vault) to achieve unauthenticated RCE: (1) PKI ACME validation bypass (GHSA-x8fg-h69x-p28f, 8.2), (2) ACL deny bypass via non-canonical URLs (GHSA-fg5x-7whg-6c28, 7.6), (3) cross-namespace policy access (GHSA-mjch-vcw3-hhmf, 7.7), and (4) RCE via Raft snapshot restore (GHSA-j6wc-jpvg-xfxq, 9.4). OpenBao patched in v2.6.3/v2.7.0 (Sep 23); HashiCorp (IBM) had no Vault fix as of Oct 6. The chain is not universally exploitable \u2014 requires ACME + Certificate Auth + SPIFFE + Raft storage + specific role configs.",
+      "context": "ControlPlane published a full exploit chain chaining four vulnerabilities in OpenBao (and HashiCorp Vault) to achieve unauthenticated RCE: (1) PKI ACME validation bypass (GHSA-x8fg-h69x-p28f, 8.2), (2) ACL deny bypass via non-canonical URLs (GHSA-fg5x-7whg-6c28, 7.6), (3) cross-namespace policy access (GHSA-mjch-vcw3-hhmf, 7.7), and (4) RCE via Raft snapshot restore (GHSA-j6wc-jpvg-xfxq, 9.4). OpenBao patched in v2.6.3/v2.7.0 (Sep 23); HashiCorp (IBM) had no Vault fix as of Oct 6. The chain is not universally exploitable — requires ACME + Certificate Auth + SPIFFE + Raft storage + specific role configs.",
       "whyItMatters": "Significant industry event with direct security or availability impact.",
       "sourceUrl": "https://control-plane.io/posts/unauthed-to-rce-in-vault-and-openbao/"
     },
     {
-      "topic": "LiteLLM Supply Chain Breach \u2014 2,488 Affected Corporate Domains, 153 GB Exfiltrated",
-      "context": "On Oct 21, 2026, LiteLLM v1.107.0 was compromised via their PyPI release pipeline. The attack exploited a leaked API key for an internal experimental service (committed to a public repo in May 2026), which held a GitHub OAuth token for one of two org owners. The attacker pushed to the private release repo, forced past branch protection, dispatched the pipeline, approved the gate with a second stolen token, and published a malicious wheel that executed via Python startup hooks \u2014 stealing credentials from dev machines, CI/CD runners, and production servers. Hudson Rock analyzed 153 GB of exfiltrated data across 433,909 files, attributing 118,829 CI runner dumps to 2,488 corporate domains. Microsoft confirmed two execution paths (credential collector + Unix loader). LiteLLM also suffered a prior March 2026 supply chain breach (via a compromised dependency, Trivy), making this a repeat incident.",
+      "topic": "LiteLLM Supply Chain Breach — 2,488 Affected Corporate Domains, 153 GB Exfiltrated",
+      "context": "On Oct 21, 2026, LiteLLM v1.107.0 was compromised via their PyPI release pipeline. The attack exploited a leaked API key for an internal experimental service (committed to a public repo in May 2026), which held a GitHub OAuth token for one of two org owners. The attacker pushed to the private release repo, forced past branch protection, dispatched the pipeline, approved the gate with a second stolen token, and published a malicious wheel that executed via Python startup hooks — stealing credentials from dev machines, CI/CD runners, and production servers. Hudson Rock analyzed 153 GB of exfiltrated data across 433,909 files, attributing 118,829 CI runner dumps to 2,488 corporate domains. Microsoft confirmed two execution paths (credential collector + Unix loader). LiteLLM also suffered a prior March 2026 supply chain breach (via a compromised dependency, Trivy), making this a repeat incident.",
       "whyItMatters": "Significant industry event with direct security or availability impact.",
       "sourceUrl": "https://docs.litellm.ai/blog/security-incident-oct-21-2026"
     },
@@ -32,7 +32,7 @@
       "verificationNote": "Tier 1: Datadog official report. Tier 2: ivector.co technical breakdown, Reddit r/AI_Agents discussion, cloudandsre.com SRE perspective. Cross-verified."
     },
     {
-      "title": "2026 AI Model Timeline \u2014 Rapid Release Cadence Across Major Providers",
+      "title": "2026 AI Model Timeline — Rapid Release Cadence Across Major Providers",
       "sourceUrl": "https://www.reddit.com/r/AI_Agents/comments/1wov7yv/2026_ai_model_timeline/",
       "summary": "r/AI_Agents post tracking the 2026 model release cadence: Jan 27 Kimi K2.5 (vision+agent workflows), Feb 5 GPT-5.3-Codex, Feb 12 GPT-5.3-Codex-Spark + MiniMax M2.5, Feb 14 Seed 2.0 (ByteDance), Feb 17 Claude Sonnet 4.6, Feb 19 Gemini 3.1 Pro, Mar 3 Gemini 3.1 Flash-Lite, Mar 5 GPT-5.4/5.4 Pro, Mar 10 Nemotron 3 Super (NVIDIA), Mar 16 Mistral Small 4. The timeline demonstrates accelerating release velocity and increasing focus on agentic/workflow capabilities.",
       "relevance": "medium",
@@ -41,9 +41,9 @@
     {
       "title": "K2-Horizon-MoVA-36B-A4B: Frontier-Class MoE at 4B Active Parameters",
       "sourceUrl": "https://www.reddit.com/r/LocalLLaMA/comments/1w67wso/ifmk2horizonmova36ba4bgguf_hugging_face/",
-      "summary": "IFM released K2-Horizon-MoVA-36B-A4B, a sparse Mixture-of-Experts model with Mixture-of-Values attention. 36B total params, 4B active per token. Claims frontier-class results on agentic and reasoning benchmarks, outperforming open dense ~30B models and MoE models up to 15\u00d7 its size, and competing with closed frontier models. Features 512K native context. Intermediate checkpoints, training data, and code to be released. 231 points, 92 comments on r/LocalLLaMA.",
+      "summary": "IFM released K2-Horizon-MoVA-36B-A4B, a sparse Mixture-of-Experts model with Mixture-of-Values attention. 36B total params, 4B active per token. Claims frontier-class results on agentic and reasoning benchmarks, outperforming open dense ~30B models and MoE models up to 15× its size, and competing with closed frontier models. Features 512K native context. Intermediate checkpoints, training data, and code to be released. 231 points, 92 comments on r/LocalLLaMA.",
       "relevance": "high",
-      "verificationNote": "Reddit post. Claims are from IFM (model authors) \u2014 need independent benchmark verification. Not yet validated by third-party benchmarks."
+      "verificationNote": "Reddit post. Claims are from IFM (model authors) — need independent benchmark verification. Not yet validated by third-party benchmarks."
     },
     {
       "title": "Google TimesFM-3: 330M-Parameter Time Series Foundation Model with Native Multivariate Forecasting",
@@ -71,14 +71,14 @@
     {
       "title": "OpenBao and HashiCorp Vault: Four-Chained RCE from Unauthenticated Access",
       "sourceUrl": "https://control-plane.io/posts/unauthed-to-rce-in-vault-and-openbao/",
-      "summary": "ControlPlane published a full exploit chain chaining four vulnerabilities in OpenBao (and HashiCorp Vault) to achieve unauthenticated RCE: (1) PKI ACME validation bypass (GHSA-x8fg-h69x-p28f, 8.2), (2) ACL deny bypass via non-canonical URLs (GHSA-fg5x-7whg-6c28, 7.6), (3) cross-namespace policy access (GHSA-mjch-vcw3-hhmf, 7.7), and (4) RCE via Raft snapshot restore (GHSA-j6wc-jpvg-xfxq, 9.4). OpenBao patched in v2.6.3/v2.7.0 (Sep 23); HashiCorp (IBM) had no Vault fix as of Oct 6. The chain is not universally exploitable \u2014 requires ACME + Certificate Auth + SPIFFE + Raft storage + specific role configs.",
+      "summary": "ControlPlane published a full exploit chain chaining four vulnerabilities in OpenBao (and HashiCorp Vault) to achieve unauthenticated RCE: (1) PKI ACME validation bypass (GHSA-x8fg-h69x-p28f, 8.2), (2) ACL deny bypass via non-canonical URLs (GHSA-fg5x-7whg-6c28, 7.6), (3) cross-namespace policy access (GHSA-mjch-vcw3-hhmf, 7.7), and (4) RCE via Raft snapshot restore (GHSA-j6wc-jpvg-xfxq, 9.4). OpenBao patched in v2.6.3/v2.7.0 (Sep 23); HashiCorp (IBM) had no Vault fix as of Oct 6. The chain is not universally exploitable — requires ACME + Certificate Auth + SPIFFE + Raft storage + specific role configs.",
       "relevance": "critical",
       "verificationNote": "Tier 1: Primary source from ControlPlane (the researcher who discovered and published the chain). Additional sources: GitHub GHSA advisory, faun.dev analysis, dbugs writeup."
     },
     {
-      "title": "LiteLLM Supply Chain Breach \u2014 2,488 Affected Corporate Domains, 153 GB Exfiltrated",
+      "title": "LiteLLM Supply Chain Breach — 2,488 Affected Corporate Domains, 153 GB Exfiltrated",
       "sourceUrl": "https://docs.litellm.ai/blog/security-incident-oct-21-2026",
-      "summary": "On Oct 21, 2026, LiteLLM v1.107.0 was compromised via their PyPI release pipeline. The attack exploited a leaked API key for an internal experimental service (committed to a public repo in May 2026), which held a GitHub OAuth token for one of two org owners. The attacker pushed to the private release repo, forced past branch protection, dispatched the pipeline, approved the gate with a second stolen token, and published a malicious wheel that executed via Python startup hooks \u2014 stealing credentials from dev machines, CI/CD runners, and production servers. Hudson Rock analyzed 153 GB of exfiltrated data across 433,909 files, attributing 118,829 CI runner dumps to 2,488 corporate domains. Microsoft confirmed two execution paths (credential collector + Unix loader). LiteLLM also suffered a prior March 2026 supply chain breach (via a compromised dependency, Trivy), making this a repeat incident.",
+      "summary": "On Oct 21, 2026, LiteLLM v1.107.0 was compromised via their PyPI release pipeline. The attack exploited a leaked API key for an internal experimental service (committed to a public repo in May 2026), which held a GitHub OAuth token for one of two org owners. The attacker pushed to the private release repo, forced past branch protection, dispatched the pipeline, approved the gate with a second stolen token, and published a malicious wheel that executed via Python startup hooks — stealing credentials from dev machines, CI/CD runners, and production servers. Hudson Rock analyzed 153 GB of exfiltrated data across 433,909 files, attributing 118,829 CI runner dumps to 2,488 corporate domains. Microsoft confirmed two execution paths (credential collector + Unix loader). LiteLLM also suffered a prior March 2026 supply chain breach (via a compromised dependency, Trivy), making this a repeat incident.",
       "relevance": "critical",
       "verificationNote": "Tier 1: LiteLLM official incident blog, Microsoft Security Blog analysis, Hudson Rock raw data analysis, BleepingComputer coverage. Cross-verified across 4 independent sources."
     },
@@ -97,9 +97,9 @@
       "verificationNote": "Tier 2: Netflix Tech Blog article linked in the Reddit post. Cross-verified as a real engineering migration case study."
     },
     {
-      "title": "OpenAI\u2013Hugging Face Incident Discussed at Black Hat USA 2026",
+      "title": "OpenAI–Hugging Face Incident Discussed at Black Hat USA 2026",
       "sourceUrl": "https://www.reddit.com/r/LocalLLaMA/comments/1vhv8ka/black_hat_usa_2026_the_breaking_news_the/",
-      "summary": "Black Hat USA 2026 presentation covered the OpenAI\u2013Hugging Face incident, with more details disclosed than previously public. The talk explained communication patterns between different AI agents. r/LocalLLaMA comments (39 points, 33 comments) discussed sandbox escape risks, cross-tenant Artifactory access, Google Gemini sandbox improvements, and broader concerns about AI agents gaining unauthorized infrastructure access.",
+      "summary": "Black Hat USA 2026 presentation covered the OpenAI–Hugging Face incident, with more details disclosed than previously public. The talk explained communication patterns between different AI agents. r/LocalLLaMA comments (39 points, 33 comments) discussed sandbox escape risks, cross-tenant Artifactory access, Google Gemini sandbox improvements, and broader concerns about AI agents gaining unauthorized infrastructure access.",
       "relevance": "medium",
       "verificationNote": "Tier 2: YouTube video linked in the post. Reddit discussion is speculative commentary. The actual Black Hat presentation content is not independently verified from the search results."
     }
@@ -167,5 +167,6 @@
     "verifiedFindings": 9,
     "unverifiedFindings": 2
   },
-  "researchDate": "2026-11-03"
+  "researchDate": "2026-11-03",
+  "lastUpdated": "2026-11-03T14:33:39.309088Z"
 }
