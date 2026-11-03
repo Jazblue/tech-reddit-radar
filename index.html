@@ -694,6 +694,37 @@
       color: white;
       transform: scale(1.1);
     }
+  
+    .hidden {
+      display: none !important;
+    }
+
+    .cross-trend-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .cross-trend-item p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .idea-item {
+      background: linear-gradient(135deg, rgba(21, 94, 117, 0.15), rgba(4, 34, 60, 0.4));
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .idea-item p {
+      margin: 0.25rem 0;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
@@ -714,71 +745,83 @@
 
   <main>
     <!-- Summary Section -->
-    <section id="summary-section" class="fade-in-up stagger-delay-1">
-      <h2>Summary</h2>
-      <div class="summary-text" id="summary"></div>
-    </section>
+        <section id="summary-section" class="fade-in-up stagger-delay-1 hidden">
+          <h2>Summary</h2>
+          <div class="summary-text" id="summary"></div>
+        </section>
 
-    <!-- Biggest Discussions -->
-    <section id="biggest-section" class="fade-in-up stagger-delay-2">
-      <h2>Biggest Discussions</h2>
-      <div class="card-grid" id="biggest-discussions"></div>
-    </section>
+        <!-- Biggest Discussions -->
+        <section id="biggest-section" class="fade-in-up stagger-delay-2 hidden">
+          <h2>Biggest Discussions</h2>
+          <div class="card-grid" id="biggest-discussions"></div>
+        </section>
 
-    <!-- AI Watch -->
-    <section id="ai-section" class="fade-in-up stagger-delay-3">
-      <h2>AI Watch</h2>
-      <div class="card-grid" id="ai-watch"></div>
-    </section>
+        <!-- AI Watch -->
+        <section id="ai-section" class="fade-in-up stagger-delay-3 hidden">
+          <h2>AI Watch</h2>
+          <div class="card-grid" id="ai-watch"></div>
+        </section>
 
-    <!-- Cybersecurity Watch -->
-    <section id="cyber-section" class="fade-in-up stagger-delay-4">
-      <h2>Cybersecurity Watch</h2>
-      <div class="card-grid" id="cyber-watch"></div>
-    </section>
+        <!-- Cybersecurity Watch -->
+        <section id="cyber-section" class="fade-in-up stagger-delay-4 hidden">
+          <h2>Cybersecurity Watch</h2>
+          <div class="card-grid" id="cyber-watch"></div>
+        </section>
 
-    <!-- AWS / Cloud Watch -->
-    <section id="aws-section" class="fade-in-up stagger-delay-5">
-      <h2>AWS / Cloud Watch</h2>
-      <div class="card-grid" id="aws-watch"></div>
-    </section>
+        <!-- AWS / Cloud Watch -->
+        <section id="aws-section" class="fade-in-up stagger-delay-5 hidden">
+          <h2>AWS / Cloud Watch</h2>
+          <div class="card-grid" id="aws-watch"></div>
+        </section>
 
-    <!-- Tools People Are Talking About -->
-    <section id="tools-section" class="fade-in-up stagger-delay-1">
-      <h2>Tools People Are Talking About</h2>
-      <div id="tools-watch"></div>
-    </section>
+        <!-- Tools People Are Talking About -->
+        <section id="tools-section" class="fade-in-up stagger-delay-1 hidden">
+          <h2>Tools People Are Talking About</h2>
+          <div id="tools-watch"></div>
+        </section>
 
-    <!-- Cloud / IT Career Signals -->
-    <section id="career-section" class="fade-in-up stagger-delay-2">
-      <h2>Cloud / IT Career Signals</h2>
-      <div id="career-signals"></div>
-    </section>
+        <!-- Cloud / IT Career Signals -->
+        <section id="career-section" class="fade-in-up stagger-delay-2 hidden">
+          <h2>Cloud / IT Career Signals</h2>
+          <div id="career-signals"></div>
+        </section>
 
-    <!-- Worth Watching -->
-    <section id="watch-section" class="fade-in-up stagger-delay-3">
-      <h2>Worth Watching</h2>
-      <div id="worth-watching"></div>
-    </section>
+        <!-- Worth Watching -->
+        <section id="watch-section" class="fade-in-up stagger-delay-3 hidden">
+          <h2>Worth Watching</h2>
+          <div id="worth-watching"></div>
+        </section>
 
-    <!-- AWS Learning Opportunity -->
-    <section id="learning-section" class="fade-in-up stagger-delay-4">
-      <h2>AWS Learning Opportunity</h2>
-      <div id="learning-opportunity"></div>
-    </section>
+        <!-- Cross-Community Trends -->
+        <section id="cross-community-section" class="fade-in-up stagger-delay-4 hidden">
+          <h2>Cross-Community Trends</h2>
+          <div id="cross-community-trends"></div>
+        </section>
 
-    <!-- Important Verification -->
-    <section id="verification-section" class="fade-in-up stagger-delay-5">
-      <h2>Important Verification</h2>
-      <div id="verification-info"></div>
-    </section>
+        <!-- Ideas for Jase -->
+        <section id="ideas-section" class="fade-in-up stagger-delay-5 hidden">
+          <h2>Ideas for Jase</h2>
+          <div id="ideas-for-jase"></div>
+        </section>
 
-    <!-- Research Quality -->
-    <section id="quality-section" class="fade-in-up stagger-delay-1">
-      <h2>Research Quality</h2>
-      <div class="quality-grid" id="quality-metrics"></div>
-      <p id="limitations" class="limitations"></p>
-    </section>
+        <!-- AWS Learning Opportunity -->
+        <section id="learning-section" class="fade-in-up stagger-delay-1 hidden">
+          <h2>AWS Learning Opportunity</h2>
+          <div id="learning-opportunity"></div>
+        </section>
+
+        <!-- Important Verification -->
+        <section id="verification-section" class="fade-in-up stagger-delay-2 hidden">
+          <h2>Important Verification</h2>
+          <div id="verification-info"></div>
+        </section>
+
+        <!-- Research Quality -->
+        <section id="quality-section" class="fade-in-up stagger-delay-3 hidden">
+          <h2>Research Quality</h2>
+          <div class="quality-grid" id="quality-metrics"></div>
+          <p id="limitations" class="limitations"></p>
+        </section>
   </main>
 
   <footer>
@@ -841,29 +884,32 @@
       renderLearning(d.awsLearningOpportunity, 'learning-opportunity', 'learning-section');
       renderVerification(d.verificationInformation || [], 'verification-info', 'verification-section');
       renderQuality(d.researchQuality || {}, 'quality-metrics', 'quality-section', d.limitations);
-    }
+            renderCrossCommunityTrends(d.crossCommunityTrends || {}, 'cross-community-trends', 'cross-community-section');
+            renderIdeasForJase(d.ideasForJase || [], 'ideas-for-jase', 'ideas-section');
+          }
 
     function renderDiscussions(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <article class="card fade-in-up">
-          <div class="card-header">
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            <span class="category-tag">${escapeHtml(item.category)}</span>
-          </div>
-          <p>${escapeHtml(item.shortSummary)}</p>
-          <p><strong>Why it matters:</strong> ${escapeHtml(item.whyItMatters)}</p>
-          <p><strong>Reddit signal:</strong> ${escapeHtml(item.redditSignal)}</p>
-          <div class="links">
-            ${renderBadges(item)}
-            ${(item.sourceLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Source</a>`).join('')}
-            ${(item.redditLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Reddit</a>`).join('')}
-          </div>
-        </article>
-      `).join('');
-      document.getElementById(sectionId).classList.remove('hidden');
-    }
+            <article class="card fade-in-up">
+              <div class="card-header">
+                <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                <span class="category-tag">${escapeHtml(item.category)}</span>
+              </div>
+              <p>${escapeHtml(item.shortSummary)}</p>
+              <p><strong>Why it matters:</strong> ${escapeHtml(item.whyItMatters)}</p>
+              <p><strong>Reddit signal:</strong> ${escapeHtml(item.redditSignal)}</p>
+              <div class="links">
+                ${renderBadges(item)}
+                ${(item.sourceLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Source</a>`).join('')}
+                ${(item.redditLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Reddit</a>`).join('')}
+              </div>
+            </article>
+          `).join('');
+          document.getElementById(sectionId).classList.remove('hidden');
+        }
 
     function renderBadges(item) {
       const status = item.verificationStatus || 'UNVERIFIED';
@@ -878,7 +924,8 @@
 
     function renderAiWatch(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="card fade-in-up">
           <strong>${escapeHtml(item.development)}</strong>
@@ -891,7 +938,8 @@
 
     function renderCyberWatch(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="card fade-in-up">
           <div class="card-header">
@@ -908,7 +956,8 @@
 
     function renderAwsWatch(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="card fade-in-up">
           <div class="card-header">
@@ -925,7 +974,8 @@
 
     function renderTools(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="tool-item fade-in-up">
           <div>
@@ -940,7 +990,8 @@
 
     function renderCareer(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="career-signal fade-in-up">
           <strong>${escapeHtml(item.signal)}</strong>
@@ -954,7 +1005,8 @@
 
     function renderWatching(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="watch-item fade-in-up">
           <div class="watch-content">
@@ -971,8 +1023,9 @@
     }
 
     function renderLearning(item, containerId, sectionId) {
-      if (!item) return;
       const container = document.getElementById(containerId);
+      const section = document.getElementById(sectionId);
+      if (!item || Object.keys(item).length === 0) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = `
         <div class="card fade-in-up">
           <h3>${escapeHtml(item.topic)}</h3>
@@ -985,7 +1038,8 @@
 
     function renderVerification(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
-      if (!items.length) return;
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
         <div class="verification-item fade-in-up">
           <span class="verification-claim">${escapeHtml(item.claim)}</span>
@@ -1017,6 +1071,37 @@
       if (limitations) {
         document.getElementById('limitations').textContent = limitations;
       }
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderCrossCommunityTrends(trends, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      const section = document.getElementById(sectionId);
+      const trendList = [];
+      if (trends && typeof trends === 'object') {
+        for (const [key, value] of Object.entries(trends)) {
+          if (value && value.trim && value.trim()) trendList.push(value);
+        }
+      }
+      if (!trendList.length) { if (section) section.classList.add('hidden'); return; }
+      container.innerHTML = trendList.map(t => `
+        <div class="cross-trend-item fade-in-up">
+          <p>${escapeHtml(t)}</p>
+        </div>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function renderIdeasForJase(items, containerId, sectionId) {
+      const container = document.getElementById(containerId);
+      const section = document.getElementById(sectionId);
+      if (!items.length) { if (section) section.classList.add('hidden'); return; }
+      container.innerHTML = items.map(item => `
+        <div class="idea-item fade-in-up">
+          <p><strong>Idea:</strong> ${escapeHtml(item.idea)}</p>
+          <p><strong>Why:</strong> ${escapeHtml(item.rationale)}</p>
+        </div>
+      `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
 
