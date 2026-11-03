@@ -125,6 +125,8 @@ $status = @(git status --porcelain)
 
 $allowedExisting = @(
     " M data/reddit-tech-radar/latest.json",
+    " M data/reddit-tech-radar/archive/$today.json",
+    " D data/reddit-tech-radar/archive/$today.json",
     "?? data/reddit-tech-radar/archive/$today.json"
 )
 
