@@ -884,32 +884,32 @@
       renderLearning(d.awsLearningOpportunity, 'learning-opportunity', 'learning-section');
       renderVerification(d.verificationInformation || [], 'verification-info', 'verification-section');
       renderQuality(d.researchQuality || {}, 'quality-metrics', 'quality-section', d.limitations);
-            renderCrossCommunityTrends(d.crossCommunityTrends || {}, 'cross-community-trends', 'cross-community-section');
-            renderIdeasForJase(d.ideasForJase || [], 'ideas-for-jase', 'ideas-section');
-          }
+          renderCrossCommunityTrends(d.crossCommunityTrends || {}, 'cross-community-trends', 'cross-community-section');
+        renderIdeasForJase(d.ideasForJase || [], 'ideas-for-jase', 'ideas-section');
+      }
 
     function renderDiscussions(items, containerId, sectionId) {
       const container = document.getElementById(containerId);
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-            <article class="card fade-in-up">
-              <div class="card-header">
-                <h3 class="card-title">${escapeHtml(item.title)}</h3>
-                <span class="category-tag">${escapeHtml(item.category)}</span>
-              </div>
-              <p>${escapeHtml(item.shortSummary)}</p>
-              <p><strong>Why it matters:</strong> ${escapeHtml(item.whyItMatters)}</p>
-              <p><strong>Reddit signal:</strong> ${escapeHtml(item.redditSignal)}</p>
-              <div class="links">
-                ${renderBadges(item)}
-                ${(item.sourceLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Source</a>`).join('')}
-                ${(item.redditLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Reddit</a>`).join('')}
-              </div>
-            </article>
-          `).join('');
-          document.getElementById(sectionId).classList.remove('hidden');
-        }
+        <article class="card fade-in-up">
+          <div class="card-header">
+            <h3 class="card-title">${escapeHtml(item.title)}</h3>
+            <span class="category-tag">${escapeHtml(item.category)}</span>
+          </div>
+          <p>${escapeHtml(item.shortSummary)}</p>
+          <p><strong>Why it matters:</strong> ${escapeHtml(item.whyItMatters)}</p>
+          <p><strong>Reddit signal:</strong> ${escapeHtml(item.redditSignal)}</p>
+          <div class="links">
+            ${renderBadges(item)}
+            ${(item.sourceLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Source</a>`).join('')}
+            ${(item.redditLinks || []).map(l => `<a href="${escapeHtml(l)}" target="_blank" rel="noopener">Reddit</a>`).join('')}
+          </div>
+        </article>
+      `).join('');
+      document.getElementById(sectionId).classList.remove('hidden');
+      }
 
     function renderBadges(item) {
       const status = item.verificationStatus || 'UNVERIFIED';
@@ -917,8 +917,8 @@
       const statusClass = status.toLowerCase().replace(' ', '-');
       const confClass = conf.toLowerCase();
       return `
-        <span class="badge badge-${statusClass}">${escapeHtml(status)}</span>
-        <span class="badge badge-confidence-${confClass}">${escapeHtml(conf)} confidence</span>
+      <span class="badge badge-${statusClass}">${escapeHtml(status)}</span>
+      <span class="badge badge-confidence-${confClass}">${escapeHtml(conf)} confidence</span>
       `;
     }
 
@@ -927,11 +927,11 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="card fade-in-up">
-          <strong>${escapeHtml(item.development)}</strong>
-          <span class="badge badge-verified" style="margin-left: 0.5rem;">${escapeHtml(item.status)}</span>
-          <p class="watch-meta">${escapeHtml(item.keyDetail)}</p>
-        </div>
+      <div class="card fade-in-up">
+      <strong>${escapeHtml(item.development)}</strong>
+      <span class="badge badge-verified" style="margin-left: 0.5rem;">${escapeHtml(item.status)}</span>
+      <p class="watch-meta">${escapeHtml(item.keyDetail)}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -941,15 +941,15 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="card fade-in-up">
-          <div class="card-header">
-            <h3 class="card-title">${escapeHtml(item.topic)}</h3>
-            <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
-          </div>
-          <p>${escapeHtml(item.summary)}</p>
-          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
-          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
-        </div>
+      <div class="card fade-in-up">
+      <div class="card-header">
+        <h3 class="card-title">${escapeHtml(item.topic)}</h3>
+        <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
+      </div>
+      <p>${escapeHtml(item.summary)}</p>
+      <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+      <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -959,15 +959,15 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="card fade-in-up">
-          <div class="card-header">
-            <h3 class="card-title">${escapeHtml(item.topic)}</h3>
-            <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
-          </div>
-          <p>${escapeHtml(item.summary)}</p>
-          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
-          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
-        </div>
+      <div class="card fade-in-up">
+      <div class="card-header">
+        <h3 class="card-title">${escapeHtml(item.topic)}</h3>
+        <span class="category-tag">${escapeHtml(item.verificationStatus || '')}</span>
+      </div>
+      <p>${escapeHtml(item.summary)}</p>
+      <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+      <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -977,13 +977,13 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="tool-item fade-in-up">
-          <div>
-            <div class="tool-name">${escapeHtml(item.tool)}</div>
-            <div class="tool-use">${escapeHtml(item.whatItDoes)}</div>
-          </div>
-          <a href="${escapeHtml(item.officialSource)}" target="_blank" rel="noopener" style="font-size: 0.8rem;">Source</a>
-        </div>
+      <div class="tool-item fade-in-up">
+      <div>
+        <div class="tool-name">${escapeHtml(item.tool)}</div>
+        <div class="tool-use">${escapeHtml(item.whatItDoes)}</div>
+      </div>
+      <a href="${escapeHtml(item.officialSource)}" target="_blank" rel="noopener" style="font-size: 0.8rem;">Source</a>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -993,12 +993,12 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="career-signal fade-in-up">
-          <strong>${escapeHtml(item.signal)}</strong>
-          <p>${escapeHtml(item.summary)}</p>
-          <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
-          <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
-        </div>
+      <div class="career-signal fade-in-up">
+      <strong>${escapeHtml(item.signal)}</strong>
+      <p>${escapeHtml(item.summary)}</p>
+      <p><strong>Status:</strong> ${escapeHtml(item.verificationStatus || 'UNKNOWN')}</p>
+      <p><strong>Confidence:</strong> ${escapeHtml(item.confidence || 'LOW')}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -1008,16 +1008,16 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="watch-item fade-in-up">
-          <div class="watch-content">
-            <div class="watch-title">${escapeHtml(item.whatHappened)}</div>
-            <div class="watch-meta">
-              <div><strong>Why:</strong> ${escapeHtml(item.whyItMightDevelop)}</div>
-              <div><strong>Evidence:</strong> ${escapeHtml(item.whatEvidenceCurrentlyExists)}</div>
-              <div><strong>Check tomorrow:</strong> ${escapeHtml(item.whatShouldBeCheckedTomorrow)}</div>
-            </div>
-          </div>
+      <div class="watch-item fade-in-up">
+      <div class="watch-content">
+        <div class="watch-title">${escapeHtml(item.whatHappened)}</div>
+        <div class="watch-meta">
+          <div><strong>Why:</strong> ${escapeHtml(item.whyItMightDevelop)}</div>
+          <div><strong>Evidence:</strong> ${escapeHtml(item.whatEvidenceCurrentlyExists)}</div>
+          <div><strong>Check tomorrow:</strong> ${escapeHtml(item.whatShouldBeCheckedTomorrow)}</div>
         </div>
+      </div>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -1027,12 +1027,13 @@
       const section = document.getElementById(sectionId);
       if (!item || Object.keys(item).length === 0) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = `
-        <div class="card fade-in-up">
-          <h3>${escapeHtml(item.topic)}</h3>
-          <p><strong>Why:</strong> ${escapeHtml(item.why)}</p>
-          <p><strong>Study:</strong> ${escapeHtml(item.study)}</p>
-        </div>
+      <div class="card fade-in-up">
+      <h3>${escapeHtml(item.topic)}</h3>
+      <p><strong>Why:</strong> ${escapeHtml(item.why)}</p>
+      <p><strong>Study:</strong> ${escapeHtml(item.study)}</p>
+      </div>
       `;
+      document.getElementById(sectionId).classList.remove('hidden');
       document.getElementById(sectionId).classList.remove('hidden');
     }
 
@@ -1041,14 +1042,14 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="verification-item fade-in-up">
-          <span class="verification-claim">${escapeHtml(item.claim)}</span>
-          <div class="verification-badge">
-            <span class="badge badge-${(item.verificationStatus || 'UNVERIFIED').toLowerCase().replace(' ', '-')}">
-              ${escapeHtml(item.verificationStatus)}
-            </span>
-          </div>
-        </div>
+      <div class="verification-item fade-in-up">
+      <span class="verification-claim">${escapeHtml(item.claim)}</span>
+      <div class="verification-badge">
+        <span class="badge badge-${(item.verificationStatus || 'UNVERIFIED').toLowerCase().replace(' ', '-')}">
+          ${escapeHtml(item.verificationStatus)}
+        </span>
+      </div>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -1056,20 +1057,20 @@
     function renderQuality(q, containerId, sectionId, limitations) {
       const container = document.getElementById(containerId);
       const metrics = [
-        { label: 'Primary Sources', value: q.primarySourcesChecked || 0 },
-        { label: 'Secondary Sources', value: q.secondarySourcesChecked || 0 },
-        { label: 'Community Sources', value: q.communitySourcesChecked || 0 },
-        { label: 'Verified Findings', value: q.verifiedFindings || 0 },
-        { label: 'Unverified Findings', value: q.unverifiedFindings || 0 },
+      { label: 'Primary Sources', value: q.primarySourcesChecked || 0 },
+      { label: 'Secondary Sources', value: q.secondarySourcesChecked || 0 },
+      { label: 'Community Sources', value: q.communitySourcesChecked || 0 },
+      { label: 'Verified Findings', value: q.verifiedFindings || 0 },
+      { label: 'Unverified Findings', value: q.unverifiedFindings || 0 },
       ];
       container.innerHTML = metrics.map(m => `
-        <div class="quality-item fade-in-up">
-          <div class="quality-label">${m.label}</div>
-          <div class="quality-value">${m.value}</div>
-        </div>
+      <div class="quality-item fade-in-up">
+      <div class="quality-label">${m.label}</div>
+      <div class="quality-value">${m.value}</div>
+      </div>
       `).join('');
       if (limitations) {
-        document.getElementById('limitations').textContent = limitations;
+      document.getElementById('limitations').textContent = limitations;
       }
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -1079,15 +1080,15 @@
       const section = document.getElementById(sectionId);
       const trendList = [];
       if (trends && typeof trends === 'object') {
-        for (const [key, value] of Object.entries(trends)) {
-          if (value && value.trim && value.trim()) trendList.push(value);
-        }
+      for (const [key, value] of Object.entries(trends)) {
+      if (value && value.trim && value.trim()) trendList.push(value);
+      }
       }
       if (!trendList.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = trendList.map(t => `
-        <div class="cross-trend-item fade-in-up">
-          <p>${escapeHtml(t)}</p>
-        </div>
+      <div class="cross-trend-item fade-in-up">
+      <p>${escapeHtml(t)}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
@@ -1097,10 +1098,10 @@
       const section = document.getElementById(sectionId);
       if (!items.length) { if (section) section.classList.add('hidden'); return; }
       container.innerHTML = items.map(item => `
-        <div class="idea-item fade-in-up">
-          <p><strong>Idea:</strong> ${escapeHtml(item.idea)}</p>
-          <p><strong>Why:</strong> ${escapeHtml(item.rationale)}</p>
-        </div>
+      <div class="idea-item fade-in-up">
+      <p><strong>Idea:</strong> ${escapeHtml(item.idea)}</p>
+      <p><strong>Why:</strong> ${escapeHtml(item.rationale)}</p>
+      </div>
       `).join('');
       document.getElementById(sectionId).classList.remove('hidden');
     }
